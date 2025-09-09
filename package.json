@@ -1,4 +1,22 @@
 {
+  "name": "risa",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/RISA-Remaja-Indonesia-Sehat/RISA#readme",
+  "bugs": {
+    "url": "https://github.com/RISA-Remaja-Indonesia-Sehat/RISA/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RISA-Remaja-Indonesia-Sehat/RISA.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "framer-motion": "^12.23.12"
   }

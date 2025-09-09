@@ -6,18 +6,93 @@
     <title>RISA</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="../src/css/button.css">
 </head>
 
-<body class="bg-gray-50">
+<body>
   <header id="navbar"></header>
 
-  <main class="max-w-3xl mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Selamat Datang di RISA</h1>
-    <div id="cards" class="grid gap-4"></div>
-  </main>
+  <!-- Hero -->
+  <section class="container my-4 mx-auto">
+    <div class="p-4">
+      <h1 class="text-2xl text-center font-bold mb-3 md:mb-1">Berani Tahu, Berani Lindungi Diri</h1>
+      <p class="text-center text-gray-600 leading-5 mb-6">Belajar tentang pubertas, cinta, dan kesehatan reproduksi dengan cara yang aman dan mudah dipahami</p>
+      
+      <div class="w-fit mx-auto mb-10">
+        <button class="button-10" role="button">
+          <span class="text-sm">Mulai Belajar</span>
+        </button>
+      </div>
+
+      <div class="w-fit mx-auto">
+        <img src="./media/hero-image.png" alt="Hero">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="my-4 mx-auto">
+    <div class="bg-pink-100 p-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 text-center text-gray-600 gap-4 px-2.5">
+        <div>
+          <div class="w-fit mx-auto">
+            <img width="40" height="40" src="https://img.icons8.com/ios-filled/50/lock.png" alt="lock"/>
+          </div>
+          <p class="text-sm/4 mt-2">Semua data di platform ini dijamin aman serta terjaga kerahasiaannya</p>
+        </div>
+        <div>
+          <div class="w-fit mx-auto">
+            <img width="40" height="40" src="https://img.icons8.com/glyph-neue/64/trophy.png" alt="trophy"/>
+          </div>
+          <p class="text-sm/4 mt-2">Game seru untuk uji pengetahuanmu sekaligus nambah wawasan baru</p>
+        </div>
+        <div>
+          <div class="w-fit mx-auto">
+            <img width="40" height="40" src="https://img.icons8.com/ios-filled/50/syringe.png" alt="syringe"/>
+          </div>
+          <p class="text-sm/4 mt-2">Temukan informasi lengkap tentang vaksin HPV, termasuk lokasi layanan dan harga</p>
+        </div>
+        <div>
+          <div class="w-fit mx-auto">
+            <img width="40" height="40" src="https://img.icons8.com/ios-filled/50/calendar.png" alt="calendar"/>
+          </div>
+          <p class="text-sm/4 mt-2">Game seru untuk uji pengetahuanmu sekaligus nambah wawasan baru</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Artikel -->
+   <section class="container my-4 mx-auto">
+    <div class="p-4">
+      <div class="flex justify-between items-center">
+        <h4 class="font-semibold text-xl">Artikel Populer</h4>
+
+        <div class="flex justify-center items-center gap-2">
+          <p class="text-sm">Lihat Lainnya</p>
+          <img width="25" height="25" src="https://img.icons8.com/ios/50/right.png" alt="right"/>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3">
+        <div>
+          <div></div>
+          <span>Hiv</span>
+        </div>
+        <div>
+          <div></div>
+          <span>Hiv</span>
+        </div>
+        <div>
+          <div></div>
+          <span>Hiv</span>
+        </div>
+      </div>
+    </div>
+   </section>
 
   <footer id="footer"></footer>
 
-  <script type="module" src="/client/src/js/index.js"></script>
+  <script type="module" src="../src/js/index.js"></script>
 </body>
 </html>
