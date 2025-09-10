@@ -1,20 +1,453 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <title>RISA | Myth VS Fact</title>
-    
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mitos vs Fakta — Drag & Drop GSAP</title>
+
+  <!-- Tailwind + GSAP + Confetti -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root{
+      --primary: #F89BB1; /* branding */
+      --white: #ffffff;
+    }
+    body { background: linear-gradient(180deg, #fff 0%, rgba(248,155,177,0.06) 100%); }
+
+    /* clone while dragging */
+    .drag-clone {
+      position: fixed;
+      pointer-events: none;
+      transform-origin: top left;
+      z-index: 9999;
+      will-change: transform;
+      border-radius: 12px;
+      box-shadow: 0 30px 60px rgba(9,10,31,0.18);
+    }
+
+    .dropzone {
+      transition: box-shadow .18s, transform .18s, background-color .18s;
+    }
+    .dropzone.active {
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12), 0 0 28px rgba(248,155,177,0.18);
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    /* trophy shine */
+    .trophy {
+      filter: drop-shadow(0 10px 30px rgba(248,155,177,0.25));
+    }
+
+    /* progress neon */
+    .progress-inner {
+      background: linear-gradient(90deg, rgba(248,155,177,1), rgba(255,255,255,0.9));
+      box-shadow: 0 6px 18px rgba(248,155,177,0.18);
+    }
+  </style>
 </head>
-<body>
-    <header id="navbar"></header>
-    
-    <main>
-        
-    </main>
-    
-    <footer id="footer"/>
-    <script type="module" src="../src/js/dragNdrop.js"></script>
+<body class="min-h-screen flex items-start justify-center py-12">
+
+  <div class="w-full max-w-4xl px-4">
+    <!-- Header -->
+    <div class="flex items-center gap-4 mb-6">
+      <button id="backBtn" class="p-2 rounded-md hover:bg-gray-100">⬅</button>
+      <div>
+        <h1 class="text-3xl font-extrabold" style="color:var(--primary)">Mitos vs Fakta</h1>
+        <p class="text-sm text-gray-500">Seret kartu ke zona yang sesuai — support touch & mouse. Animasi GSAP powered.</p>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="mb-6">
+      <div class="flex justify-between mb-2 text-sm">
+        <div id="progressText">Pertanyaan 1 dari 5</div>
+        <div id="scoreText">Skor: 0/5</div>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+        <div id="progressBar" class="h-3 progress-inner rounded-full" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Card area -->
+    <div class="mb-8">
+      <div id="statementCard" class="bg-white rounded-xl p-6 shadow-lg cursor-grab select-none">
+        <p id="statementText" class="text-xl font-semibold">...</p>
+        <p class="text-xs text-gray-400 mt-3">Drag me — or tap the buttons below.</p>
+      </div>
+    </div>
+
+    <!-- Dropzones -->
+    <div class="grid md:grid-cols-2 gap-6">
+      <div id="mythZone" class="dropzone p-6 border-2 border-dashed rounded-xl text-center" data-type="myth">
+        <div class="w-16 h-16 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center">❌</div>
+        <h3 class="text-xl font-bold text-red-500">MITOS</h3>
+        <p class="text-sm text-gray-500">Seret kesini jika itu mitos</p>
+      </div>
+
+      <div id="factZone" class="dropzone p-6 border-2 border-dashed rounded-xl text-center" data-type="fact">
+        <div class="w-16 h-16 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">✅</div>
+        <h3 class="text-xl font-bold text-green-500">FAKTA</h3>
+        <p class="text-sm text-gray-500">Seret kesini jika itu fakta</p>
+      </div>
+    </div>
+
+    <!-- action buttons -->
+    <div class="flex gap-4 justify-center mt-8">
+      <button id="btnMitos" class="px-6 py-2 border rounded hover:bg-red-50">Ini MITOS</button>
+      <button id="btnFakta" class="px-6 py-2 border rounded hover:bg-green-50">Ini FAKTA</button>
+    </div>
+  </div>
+
+  <!-- result overlay -->
+  <div id="resultOverlay" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl p-8 w-[720px] text-center">
+      <div class="mb-4">
+        <img id="trophyImg" src="https://dummyimage.com/120x120/ffd700/000.png&text=🏆" class="mx-auto trophy w-28 h-28" alt="Trophy"/>
+      </div>
+      <h2 class="text-2xl font-bold mb-2" id="finalLabel">Game Selesai!</h2>
+      <p class="mb-2">Jawaban benar: <span id="finalScore">0/5</span></p>
+      <p class="mb-4 font-semibold text-lg">Total Poin: <span id="finalPoints">0</span></p>
+
+      <div class="flex justify-center gap-3">
+        <button id="downloadAchievement" class="px-5 py-2 bg-[var(--primary)] text-white rounded">⬇️ Download Achievement</button>
+        <button id="shareAchievement" class="px-5 py-2 border rounded">🔗 Bagikan</button>
+        <button id="playAgain" class="px-5 py-2 border rounded">🔁 Main Lagi</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* ==========================
+   Data & state
+   ========================== */
+const statements = [
+  { text: "Menstruasi adalah proses normal dan sehat pada wanita", correct: "fact" },
+  { text: "Wanita yang sedang menstruasi tidak boleh berenang", correct: "myth" },
+  { text: "Vaksin HPV dapat mencegah kanker serviks", correct: "fact" },
+  { text: "PMS hanya ada di 'pikiran' saja", correct: "myth" },
+  { text: "Olahraga dapat membantu mengurangi nyeri menstruasi", correct: "fact" }
+];
+
+let currentIndex = 0;
+let score = 0;
+let startTime = Date.now();
+const primaryColor = '#F89BB1';
+
+/* ==========================
+   Elements
+   ========================== */
+const statementCard = document.getElementById('statementCard');
+const statementText = document.getElementById('statementText');
+const progressBar = document.getElementById('progressBar');
+const progressText = document.getElementById('progressText');
+const scoreText = document.getElementById('scoreText');
+const mythZone = document.getElementById('mythZone');
+const factZone = document.getElementById('factZone');
+const resultOverlay = document.getElementById('resultOverlay');
+const finalScoreEl = document.getElementById('finalScore');
+const finalPointsEl = document.getElementById('finalPoints');
+const trophyImg = document.getElementById('trophyImg');
+
+/* ==========================
+   Render / Helpers
+   ========================== */
+function renderStatement() {
+  const s = statements[currentIndex];
+  statementText.textContent = s.text;
+  progressText.textContent = `Pertanyaan ${currentIndex + 1} dari ${statements.length}`;
+  scoreText.textContent = `Skor: ${score}/${statements.length}`;
+  gsap.fromTo(statementCard, { y: 12, opacity: 0, scale: 0.98 }, { y: 0, opacity: 1, scale: 1, duration: 0.45, ease: "power2.out" });
+  progressBar.style.width = `${((currentIndex + 1) / statements.length) * 100}%`;
+}
+
+/* ==========================
+   GSAP dropzone pulse
+   ========================== */
+function pulseZone(zone) {
+  gsap.fromTo(zone, { boxShadow: "0 0 0px rgba(0,0,0,0)" }, {
+    boxShadow: `0 20px 40px rgba(0,0,0,0.08), 0 0 30px ${primaryColor}33`,
+    duration: 0.28,
+    yoyo: true,
+    repeat: 1,
+    ease: "power1.inOut"
+  });
+}
+
+/* ==========================
+   Answer logic
+   ========================== */
+function answer(choice) {
+  const correct = statements[currentIndex].correct;
+  const isCorrect = choice === correct;
+  // feedback color
+  if (isCorrect) {
+    score++;
+    confettiBurst();
+    gsap.to(statementCard, { backgroundColor: "#ecfdf5", duration: 0.35, repeat: 1, yoyo: true });
+  } else {
+    gsap.to(statementCard, { backgroundColor: "#fff1f2", duration: 0.35, repeat: 1, yoyo: true });
+  }
+
+  // small badge pop
+  const badge = document.createElement('div');
+  badge.textContent = isCorrect ? '✓ Benar' : '✗ Salah';
+  badge.className = 'absolute px-4 py-2 rounded-full text-sm';
+  badge.style.background = isCorrect ? '#DCFCE7' : '#FEE2E2';
+  badge.style.left = '50%';
+  badge.style.transform = 'translateX(-50%)';
+  badge.style.top = '8px';
+  statementCard.appendChild(badge);
+  gsap.fromTo(badge, { y: -10, opacity: 0, scale: 0.8 }, { y: 0, opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.4)" });
+  setTimeout(() => { gsap.to(badge, { opacity: 0, duration: 0.25, onComplete: () => badge.remove() }); }, 900);
+
+  // next or end
+  setTimeout(() => {
+    if (currentIndex + 1 >= statements.length) {
+      endGame();
+    } else {
+      currentIndex++;
+      renderStatement();
+    }
+  }, 900);
+}
+
+/* ==========================
+   Confetti
+   ========================== */
+function confettiBurst() {
+  confetti({
+    particleCount: 90,
+    spread: 80,
+    origin: { y: 0.6 },
+    colors: [primaryColor, '#FFFFFF', '#FFD700']
+  });
+}
+
+/* ==========================
+   End game + achievement
+   ========================== */
+function calculatePoints() {
+  const basePoints = score * 10;
+  const timeBonus = Math.max(0, 60 - Math.floor((Date.now() - startTime) / 1000));
+  return basePoints + timeBonus;
+}
+
+function endGame() {
+  const points = calculatePoints();
+  finalScoreEl.textContent = `${score}/${statements.length}`;
+  finalPointsEl.textContent = points;
+  resultOverlay.classList.remove('hidden');
+
+  // trophy pop + confetti
+  gsap.fromTo(trophyImg, { scale: 0.6, y: 20, opacity: 0 }, { scale: 1, y: 0, opacity: 1, duration: 0.7, ease: "elastic.out(1,0.6)" });
+  confettiBurst();
+}
+
+/* ==========================
+   Download achievement (canvas PNG)
+   ========================== */
+async function downloadAchievementPNG() {
+  const points = calculatePoints();
+  const canvas = document.createElement('canvas');
+  canvas.width = 1200;
+  canvas.height = 630;
+  const ctx = canvas.getContext('2d');
+
+  // bg gradient (primary -> white)
+  const g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+  g.addColorStop(0, '#ffffff');
+  g.addColorStop(1, primaryColor);
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // badge circle
+  ctx.beginPath();
+  ctx.arc(200, 240, 120, 0, Math.PI * 2);
+  ctx.fillStyle = '#FFD700';
+  ctx.fill();
+  ctx.lineWidth = 8;
+  ctx.strokeStyle = '#F59E0B';
+  ctx.stroke();
+  ctx.closePath();
+
+  // text
+  ctx.fillStyle = '#111827';
+  ctx.font = 'bold 36px Arial';
+  ctx.textAlign = 'left';
+  ctx.fillText('🎉 Aku baru dapat Achievement Point di RISA!', 360, 160);
+
+  ctx.font = 'bold 64px Arial';
+  ctx.fillStyle = '#111827';
+  ctx.fillText(`${points} pts`, 360, 250);
+
+  ctx.font = '24px Arial';
+  ctx.fillStyle = '#333';
+  ctx.fillText('Yuk ikut main & kumpulin poin di RISA 🚀', 360, 320);
+
+  // CTA footer
+  ctx.font = '20px Arial';
+  ctx.fillStyle = '#111827';
+  ctx.fillText('👉 Main sekarang: risa.lovable.app/play', 360, 420);
+
+  // download
+  canvas.toBlob((blob) => {
+    if (!blob) return;
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `risa-achievement-${Date.now()}.png`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  });
+}
+
+/* ==========================
+   Share fallback
+   ========================== */
+async function shareAchievement() {
+  const points = calculatePoints();
+  const shareUrl = 'https://risa.lovable.app/play';
+  const shareText = `🎉 Aku baru dapat ${points} pts di RISA! Yuk ikut main & kumpulin poin 🚀 ${shareUrl}`;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: 'RISA Achievement', text: shareText, url: shareUrl });
+    } catch (err) {
+      console.log('Share canceled', err);
+    }
+  } else {
+    await navigator.clipboard.writeText(shareText);
+    alert('Link & teks achievement tersalin ke clipboard. Paste di chat/social media!');
+  }
+}
+
+/* ==========================
+   Pointer-based drag (works on touch + mouse)
+   ========================== */
+let dragging = false;
+let dragClone = null;
+let dragOffset = { x: 0, y: 0 };
+let currentDrop = null;
+
+function initPointerDrag(el) {
+  el.addEventListener('pointerdown', (ev) => {
+    // only left click or touch
+    if (ev.button && ev.button !== 0) return;
+    ev.preventDefault();
+
+    dragging = true;
+    startPointerDrag(ev.clientX, ev.clientY, el);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp, { once: true });
+  });
+}
+
+function startPointerDrag(clientX, clientY, sourceEl) {
+  const rect = sourceEl.getBoundingClientRect();
+  dragOffset.x = clientX - rect.left;
+  dragOffset.y = clientY - rect.top;
+
+  // clone visual
+  dragClone = sourceEl.cloneNode(true);
+  dragClone.classList.add('drag-clone');
+  dragClone.style.width = rect.width + 'px';
+  dragClone.style.height = rect.height + 'px';
+  dragClone.style.left = '0px';
+  dragClone.style.top = '0px';
+  dragClone.style.borderRadius = '12px';
+  document.body.appendChild(dragClone);
+
+  // track position in clone._x / _y
+  dragClone._x = clientX - dragOffset.x;
+  dragClone._y = clientY - dragOffset.y;
+  gsap.set(dragClone, { x: dragClone._x, y: dragClone._y, scale: 1.03, opacity: 0.98 });
+
+  // subtle lift animation
+  gsap.to(dragClone, { scale: 1.05, duration: 0.18, ease: 'power1.out' });
+}
+
+function onPointerMove(e) {
+  if (!dragging || !dragClone) return;
+  dragClone._x = e.clientX - dragOffset.x;
+  dragClone._y = e.clientY - dragOffset.y;
+  gsap.set(dragClone, { x: dragClone._x, y: dragClone._y });
+
+  // dropzone under pointer?
+  const elUnder = document.elementFromPoint(e.clientX, e.clientY);
+  const zone = elUnder ? elUnder.closest('.dropzone') : null;
+  if (zone && (!currentDrop || currentDrop !== zone)) {
+    if (currentDrop) currentDrop.classList.remove('active');
+    currentDrop = zone;
+    currentDrop.classList.add('active');
+    pulseZone(currentDrop);
+  } else if (!zone && currentDrop) {
+    currentDrop.classList.remove('active');
+    currentDrop = null;
+  }
+}
+
+function onPointerUp(e) {
+  if (!dragging || !dragClone) return;
+  dragging = false;
+
+  // check drop target
+  const elUnder = document.elementFromPoint(e.clientX, e.clientY);
+  const zone = elUnder ? elUnder.closest('.dropzone') : null;
+  if (zone) {
+    // animate fly to center of zone
+    const targetRect = zone.getBoundingClientRect();
+    const cloneRect = dragClone.getBoundingClientRect();
+    const dx = (targetRect.left + targetRect.width/2) - (cloneRect.left + cloneRect.width/2);
+    const dy = (targetRect.top + targetRect.height/2) - (cloneRect.top + cloneRect.height/2);
+
+    gsap.to(dragClone, {
+      x: `+=${dx}`,
+      y: `+=${dy}`,
+      scale: 0.88,
+      rotation: (zone.dataset.type === 'myth') ? -8 : 8,
+      duration: 0.42,
+      ease: "power2.out",
+      onComplete: () => {
+        // animate pop and remove clone
+        gsap.to(dragClone, { opacity: 0, scale: 0.7, duration: 0.2, onComplete: () => dragClone.remove() });
+        // run answer logic
+        answer(zone.dataset.type);
+        if (currentDrop) { currentDrop.classList.remove('active'); currentDrop = null; }
+      }
+    });
+  } else {
+    // animate clone back and remove
+    gsap.to(dragClone, { x: 0, y: 0, opacity: 0, scale: 0.9, duration: 0.32, onComplete: () => dragClone.remove() });
+    if (currentDrop) { currentDrop.classList.remove('active'); currentDrop = null; }
+  }
+
+  // cleanup listeners
+  window.removeEventListener('pointermove', onPointerMove);
+}
+
+/* ==========================
+   Buttons and initialization
+   ========================== */
+document.getElementById('btnMitos').addEventListener('click', () => answer('myth'));
+document.getElementById('btnFakta').addEventListener('click', () => answer('fact'));
+
+document.getElementById('playAgain').addEventListener('click', () => {
+  resultOverlay.classList.add('hidden');
+  currentIndex = 0; score = 0; startTime = Date.now();
+  renderStatement();
+});
+
+document.getElementById('downloadAchievement').addEventListener('click', downloadAchievementPNG);
+document.getElementById('shareAchievement').addEventListener('click', shareAchievement);
+
+/* init */
+initPointerDrag(statementCard);
+renderStatement();
+</script>
 </body>
 </html>
