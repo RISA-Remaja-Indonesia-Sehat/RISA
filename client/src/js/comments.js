@@ -62,11 +62,17 @@ function addUserComment(name, body) {
 function createCommentHTML(name, body, isUserComment = false) {
   const nameColor = isUserComment ? 'text-pink-600' : 'text-gray-800';
   const badge = isUserComment ? '<span class="text-xs text-pink-500 ml-2">(Baru)</span>' : '';
+  const avatarColor = isUserComment ? 'bg-pink-500' : 'bg-gray-500';
   
   return `
     <div class="border-b border-gray-100 pb-3 mb-3">
-      <h5 class="font-medium ${nameColor} mb-1">${name}${badge}</h5>
-      <p class="text-gray-600 text-sm leading-relaxed">${body}</p>
+      <div class="flex items-center mb-2">
+        <div class="w-6 h-6 ${avatarColor} rounded-full flex items-center justify-center text-white text-xs font-medium mr-2">
+          ${name.charAt(0).toUpperCase()}
+        </div>
+        <h5 class="font-medium ${nameColor}">${name}${badge}</h5>
+      </div>
+      <p class="text-gray-600 text-sm leading-relaxed ml-8">${body}</p>
     </div>
   `;
 }
