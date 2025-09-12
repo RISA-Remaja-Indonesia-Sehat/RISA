@@ -1,13 +1,11 @@
 button.button-10 {
   touch-action: manipulation;
   position: relative;
-  display: inline-block;
   cursor: pointer;
   outline: none;
   border: 0;
   vertical-align: middle;
   text-decoration: none;
-  font-size: inherit;
   font-family: inherit;
 }
 button.button-10 {
@@ -15,7 +13,6 @@ button.button-10 {
   font-weight: 600;
   color: #382b22;
   text-transform: uppercase;
-  padding: 12px 24px;
   background: #fff0f0;
   border: 2px solid #b18597;
   border-radius: 0.75em;
