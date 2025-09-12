@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <title>Seks Itu Apa Sih? Biar Gak Salah Paham dan Bisa Jaga Diri!</title>
+    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="../src/css/button.css">
+</head>
+<body>
+    <header id="navbar"></header>
+
+    <!--Artikel-->
+    <section class="container my-12 mx-auto lg:flex items-center gap-6 overflow-hidden" id="article">
+        <div class="p-6">
+            <img src="./media/article-image-2.png" class="w-full lg:w-4xl mb-4" alt="Image 2">
+
+            <h1 class="mt-12 font-bold text-2xl md:text-3xl">Seks Itu Apa Sih? Biar Gak Salah Paham dan Bisa Jaga Diri!</h1>
+
+            <div class="prose max-w-none mt-4">
+                <p class="text-gray-700 leading-relaxed mb-2">
+                    <em>“Anak sepertimu tidak boleh tahu hal-hal tentang seks. Itu tabu untuk diceritakan.”</em> <br>
+                    Pernah dengar kalimat kayak gitu? Padahal, justru kamu perlu tahu banyak soal seks — bukan cuma soal fisik, tapi juga emosi dan moralnya.<span class="text-blue-600 cursor-pointer font-bold text-xs align-super" onclick="toggleHivTooltip()">#</span>
+                        <div id="hiv-tooltip" class="hidden absolute ml-2 bg-white rounded-lg p-3 text-sm text-gray-700 border border-gray-500 shadow-md z-10 max-w-xs">
+                            Nilai moral: Sikap dan perilaku yang menunjukkan rasa hormat dan tanggung jawab terhadap diri sendiri dan orang lain.
+                        </div>
+                </p>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    <strong>Kenapa?</strong> Karena dengan pengetahuan yang benar, kamu bisa bikin keputusan yang tepat dan jaga diri dari hal-hal yang merugikan.
+                </p>
+            </div>
+
+            <div class="mt-12">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">🔍</span>
+                    Apa Itu Seks?
+                </h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Seks adalah saat seorang pria dan wanita menjadi sangat dekat secara fisik, yang bisa berujung pada kehamilan. Tapi, penting banget kamu tahu bahwa hubungan seks sebelum menikah itu salah dan bisa merugikan, baik dari segi kesehatan fisik maupun mental.
+                </p>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">👎</span>
+                    Kenapa Hubungan Seks Sebelum Menikah Itu Salah dan Merugikan?
+                </h2>
+                <p class="text-gray-700 mb-4">Mungkin terlihat menyenangkan dan seru, tapi sebenarnya ada banyak dampak buruknya, seperti:</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+                    <li class="relative">Risiko terkena penyakit menular seksual<span class="text-blue-600 cursor-pointer font-bold" onclick="toggleTooltip()">*</span>
+                        <div id="tooltip" class="hidden absolute ml-2 bg-white rounded-lg p-3 text-sm text-gray-700 border border-gray-500 shadow-md z-10 max-w-xs">
+                            Penyakit menular seksual: Penyakit yang bisa ditularkan lewat hubungan seksual tanpa pengaman.
+                        </div> yang bisa berbahaya.</li>
+                    <li>Kehamilan yang belum siap, yang bisa mengubah hidup kamu dan pasangan secara drastis.</li>
+                    <li>Perasaan bersalah, stres, dan sakit hati yang bisa muncul karena hubungan yang belum matang secara emosional.</li>
+                </ul>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">❗</span>
+                    Media dan Iklan: Jangan Mudah Tertipu!
+                </h2>
+                <p class="text-gray-700 mb-4">Buku <strong>The Lolita Effect</strong> bilang, “Anak-anak melihat bahan seksual pada usia yang semakin muda, dan media anak yang berbau seksual semakin banyak.” Iklan, film, lagu, dan media sosial penuh dengan gambar dan bahasa seksual yang bikin kamu mikir kalau seks itu hal yang sangat penting dan harus cepat dialami.</p>
+                <p class="text-gray-700 mb-4">Tapi coba pikir, kenapa ya pengiklan pakai gambar seksi untuk jualan baju atau produk? Jawabannya supaya kamu tertarik dan beli barang itu. Mereka ingin kamu fokus sama penampilan dan keinginan sesaat, bukan nilai dan kesehatanmu.</p>
+                
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">🧠</span>
+                    Bedakan Mana yang Benar dan Salah
+                </h2>
+                <p class="text-gray-700 mb-4">Tahu soal seks saja tidak cukup. Seperti kamu bisa tahu cara kerja mobil tapi belum tentu bisa nyetir dengan baik, kamu juga harus belajar pakai pengetahuan soal seks untuk bikin keputusan yang benar dan bertanggung jawab.</p>
+                <p class="text-gray-700 mb-4">Misalnya, anak laki-laki dan perempuan yang saling mempermainkan bagian tubuh seperti penis atau vulva itu salah, karena itu bukan cara yang sehat dan benar untuk mengenal tubuh.</p>
+                
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">💑</span>
+                    Seks Setelah Menikah: Nikmati dengan Bahagia
+                </h2>
+                <p class="text-gray-700 mb-4">Nanti, saat kamu sudah dewasa dan menikah, kamu bisa menikmati seks dengan bahagia tanpa rasa takut atau khawatir. Seks yang dilakukan dengan benar dan bertanggung jawab bisa membawa kebahagiaan, bukan penderitaan.</p>
+                
+                <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        Kata Teman-Temanmu
+                    </h3>
+                    <div class="space-y-3 text-sm text-gray-600">
+                        <p>
+                            <strong>Rina, 17 tahun</strong> - “Dulu aku bingung soal seks, tapi setelah belajar, aku jadi tahu pentingnya jaga diri dan nilai moral.” 
+                        </p>
+                        <p>
+                            <strong>Dina, 16 tahun</strong> - “Media sering bikin aku mikir yang aneh-aneh, tapi aku belajar buat gak gampang percaya iklan dan gosip.” 
+                        </p>
+                        <p>
+                            <strong>Sari, 18 tahun</strong> - “Aku percaya kalau kita sabar dan bertanggung jawab, seks itu bisa jadi hal yang indah di waktu yang tepat.”
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-gray-700 mb-4">Yuk, jangan takut belajar soal seks! Dengan pengetahuan yang benar, kamu bisa jaga diri, hargai tubuh dan hati, serta siap buat masa depan yang bahagia dan sehat!</p>
+
+                <div class="border-1 border-transparent border-t-gray-200 p-6 rounded-lg mb-1">
+                    <div class="space-y-3 text-sm text-gray-600 ">
+                        <p>
+                            <strong>Hubungan seks:</strong> Kontak fisik khusus antara pria dan wanita yang bisa menyebabkan kehamilan.
+                        </p>
+                        <p><strong>* Penyakit menular seksual:</strong> Penyakit yang bisa ditularkan lewat hubungan seksual tanpa pengaman.</p>
+                        <p>
+                            <strong><span class="text-xs align-super">#</span> Nilai moral:</strong> Sikap dan perilaku yang menunjukkan rasa hormat dan tanggung jawab terhadap diri sendiri dan orang lain.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="p-6">
+                    <h3 class="font-medium text-blue-800 mb-4 flex items-center">
+                        Sumber Referensi:
+                    </h3>
+                    <div class="space-y-2">
+                        <a href="https://archive.org/details/lolitaeffectmedi00durh/page/n1/mode/2up" target="_blank" class="block text-blue-600 hover:text-blue-800 underline transition-colors">🔗 The Lolita Effect, M. Levine</a>
+                        <a href="https://www.goodreads.com/book/show/13237717-talk-to-me-first" target="_blank" class="block text-blue-600 hover:text-blue-800 underline transition-colors">🔗 Talk to Me First, Deborah Roffman</a>
+                        <a href="https://www.goodreads.com/book/show/2807292-so-sexy-so-soon" target="_blank" class="block text-blue-600 hover:text-blue-800 underline transition-colors">🔗 So Sexy So Soon, Diane E. Levin</a>
+                        <a href="https://www.plannedparenthood.org/learn/teens/sex-and-relationships" target="_blank" class="block text-blue-600 hover:text-blue-800 underline transition-colors">🔗 Planned Parenthood: [Sexual Health Education]</a>
+                        <a href="https://www.who.int/health-topics/adolescent-health#tab=tab_2" target="_blank" class="block text-blue-600 hover:text-blue-800 underline transition-colors">🔗 WHO: [Adolescent Sexual and Reproductive Health]</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <button class="button-10 text-sm font-semibold px-3 py-2 flex items-center gap-4" role="button">
+                    <span>Bagikan</span>
+                    <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/share--v1.png" alt="share--v1"/>
+                </button>
+            </div>
+        </div>
+
+        <!-- Game -->
+        <aside class="bg-white rounded-sm shadow-lg h-fit max-w-72 lg:max-w-1/5 p-6 ml-4">
+            <div>
+                <h4 class="mb-2 font-medium">Drag & Drop Challenge</h4>
+                <img src="./media/game-item.png" alt="Game Item" class="mb-4">
+
+                <a href="#">
+                    <button class="button-10 text-xs px-4 py-2" role="button">
+                        <span>Coba Sekarang</span>
+                    </button>
+                </a>
+            </div>
+        </aside>
+    </section>
+
+    <!-- Fitur Komentar -->
+    <section class="container my-12 pt-12 border-1 border-transparent border-t-gray-200 mx-auto px-4">
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">💬 Bagikan Pengalamanmu</h3>
+            <p class="text-gray-600 mb-6">Ceritakan apa yang sudah kamu pelajari atau hal yang masih ingin kamu tahu</p>
+            
+            <form id="comment-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama (opsional)</label>
+                    <input type="text" id="user-name" placeholder="Tulis nama atau inisial kamu..." class="w-full px-3 py-2 border border-gray-300 rounded focus:border-pink-400 focus:outline-none">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Apa yang kamu pelajari hari ini?</label>
+                    <textarea id="user-comment" rows="3" placeholder="Bagikan pemikiran atau pertanyaan kamu..." class="w-full px-3 py-2 border border-gray-300 rounded focus:border-pink-400 focus:outline-none resize-none"></textarea>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button type="submit" class="button-10 text-sm px-4 py-2" role="button">
+                        <span>Kirim</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="">
+            <h4 class="text-lg font-semibold text-gray-800 mb-4">Komentar</h4>
+            <div id="comments" class="space-y-3">
+                <!-- Comments will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer"></footer>
+
+    <script type="module" src="../src/js/index.js"></script>
+    <script type="module" src="../src/js/hiv-quiz.js"></script>
+</body>
+</html>
