@@ -1,28 +1,16 @@
 // result.js - Game Result Page with GSAP Animations
 
-// Sample quiz data (this would come from the game session)
-const statements = [
-  { text: "Menstruasi adalah proses normal dan sehat pada wanita", correct: "fact" },
-  { text: "Wanita yang sedang menstruasi tidak boleh berenang", correct: "myth" },
-  { text: "Vaksin HPV dapat mencegah kanker serviks", correct: "fact" },
-  { text: "PMS hanya ada di 'pikiran' saja", correct: "myth" },
-  { text: "Olahraga dapat membantu mengurangi nyeri menstruasi", correct: "fact" }
-];
 
-// Sample result data (normally from sessionStorage or URL params)
-const mockResults = {
-  score: 80,
-  correct: 4,
-  wrong: 1,
-  duration: "01:22",
-  answers: [
-    { statement: statements[0], userAnswer: "fact", isCorrect: true },
-    { statement: statements[1], userAnswer: "myth", isCorrect: true },
-    { statement: statements[2], userAnswer: "fact", isCorrect: true },
-    { statement: statements[3], userAnswer: "myth", isCorrect: true },
-    { statement: statements[4], userAnswer: "myth", isCorrect: false }
-  ]
-};
+ document.addEventListener("DOMContentLoaded", () => {
+    const audio = document.getElementById("complete-audio");
+    if (audio) {
+      audio.play().catch(err => {
+        console.warn("Autoplay diblokir browser:", err);
+      });
+    }
+  });
+
+
 
 class ResultPage {
   constructor() {
@@ -34,9 +22,11 @@ class ResultPage {
   }
 
   getResults() {
-    // In real implementation, get from sessionStorage or URL params
-    // For now, use mock data
-    return mockResults;
+    // Ambil data dari localStorage
+    const storedResults = localStorage.getItem('quizResult'); // <- samain dengan endGame
+    if (storedResults) {
+      return JSON.parse(storedResults);
+    }
   }
 
   init() {
@@ -74,70 +64,64 @@ class ResultPage {
 
   createResultItem(answer, index) {
     const div = document.createElement('div');
-    div.className = `p-4 rounded-xl border-2 ${answer.isCorrect 
-      ? 'bg-green-50 border-green-200' 
-      : 'bg-red-50 border-red-200'} result-item opacity-0`; 
-    
-    const correctText = answer.statement.correct === 'fact' ? 'FAKTA' : 'MITOS';
-    const statusText = answer.isCorrect ? 'benar' : 'salah';
-    
-    div.innerHTML = `
-      <div class="text-left">
-        <p class="text-sm font-medium text-gray-800 mb-2">${answer.statement.text}</p>
-        <div class="flex items-center gap-2">
-          <span class="px-2 py-1 text-xs font-semibold rounded ${
-            answer.statement.correct === 'fact' 
-              ? 'bg-green-100 text-green-800' 
-              : 'bg-orange-100 text-orange-800'
-          }">${correctText}</span>
-          <span class="text-xs text-gray-600">Jawaban kamu ${statusText}</span>
-        </div>
+  div.className = `p-4 rounded-xl border-2 ${answer.isCorrect 
+    ? 'bg-green-50 border-green-200' 
+    : 'bg-red-50 border-red-200'} result-item opacity-0`; 
+  
+  const correctText = answer.statement.correct === 'fact' ? 'FAKTA' : 'MITOS';
+  const statusText = answer.isCorrect ? 'benar' : 'salah';
+
+  // render penjelasan hanya kalau salah
+  const explanationHTML = !answer.isCorrect 
+    ? `<p class="mt-2 text-sm text-gray-700"><strong>Penjelasan:</strong> ${answer.statement.explanation}</p>` 
+    : "";
+
+   
+  div.innerHTML = `
+    <div class="text-left">
+      <p class="text-sm font-medium text-gray-800 mb-2">${answer.statement.text}</p>
+      <div class="flex items-center gap-2">
+        <span class="px-2 py-1 text-xs font-semibold rounded ${
+          answer.statement.correct === 'fact' 
+            ? 'bg-green-100 text-green-800' 
+            : 'bg-orange-100 text-orange-800'
+        }">${correctText}</span>
+        <span class="text-xs text-gray-600">Jawaban kamu ${statusText}</span>
       </div>
+      ${explanationHTML}
+    </div>
     `;
     
     return div;
   }
 
   initAnimations() {
-    // Create timeline for sequential animations
     const tl = gsap.timeline();
 
-    // Animate back button
     tl.to('#back-btn', {
       opacity: 1,
       duration: 0.5,
       ease: "power2.out"
     })
-
-    // Animate score circle with scale and rotation
     .to('#score-circle', {
       opacity: 1,
       scale: 1,
       duration: 0.8,
       ease: "back.out(1.7)"
     })
-
-    // Animate score number with counter
     .to('#score-number', {
-      textContent: this.results.score,
+      textContent: this.results.score * 20,
       duration: 1.5,
       ease: "power2.out",
       snap: { textContent: 1 },
-      onComplete: () => {
-        // Trigger confetti when score animation completes
-        this.startConfetti();
-      }
+      onComplete: () => this.startConfetti()
     }, "-=0.5")
-
-    // Animate stats
     .to('#stats', {
       opacity: 1,
       y: 0,
       duration: 0.6,
       ease: "power2.out"
     }, "-=0.8")
-
-    // Animate result items with stagger
     .to('.result-item', {
       opacity: 1,
       y: 0,
@@ -145,16 +129,12 @@ class ResultPage {
       stagger: 0.1,
       ease: "power2.out"
     }, "-=0.3")
-
-    // Animate action buttons
     .to('#action-buttons', {
       opacity: 1,
       y: 0,
       duration: 0.6,
       ease: "power2.out"
     }, "-=0.2")
-
-    // Animate recommendations
     .to('#recommendations', {
       opacity: 1,
       y: 0,
@@ -162,12 +142,10 @@ class ResultPage {
       ease: "power2.out"
     }, "-=0.4");
 
-    // Counter animation for stats
     this.animateCounters();
   }
 
   animateCounters() {
-    // Animate correct count
     gsap.to('#correct-count', {
       textContent: this.results.correct,
       duration: 1,
@@ -176,7 +154,6 @@ class ResultPage {
       delay: 1
     });
 
-    // Animate wrong count
     gsap.to('#wrong-count', {
       textContent: this.results.wrong,
       duration: 1,
@@ -187,7 +164,6 @@ class ResultPage {
   }
 
   startConfetti() {
-    // Create confetti particles
     for (let i = 0; i < 100; i++) {
       this.particles.push({
         x: Math.random() * this.confettiCanvas.width,
@@ -202,11 +178,7 @@ class ResultPage {
     }
 
     this.animateConfetti();
-
-    // Stop confetti after 4 seconds
-    setTimeout(() => {
-      this.particles = [];
-    }, 4000);
+    setTimeout(() => { this.particles = []; }, 4000);
   }
 
   getRandomColor() {
@@ -218,13 +190,11 @@ class ResultPage {
     this.confettiContext.clearRect(0, 0, this.confettiCanvas.width, this.confettiCanvas.height);
 
     this.particles.forEach((particle, index) => {
-      // Update particle position
       particle.x += particle.vx;
       particle.y += particle.vy;
-      particle.vy += 0.2; // gravity
+      particle.vy += 0.2;
       particle.rotation += particle.rotationSpeed;
 
-      // Draw particle
       this.confettiContext.save();
       this.confettiContext.translate(particle.x, particle.y);
       this.confettiContext.rotate(particle.rotation * Math.PI / 180);
@@ -232,7 +202,6 @@ class ResultPage {
       this.confettiContext.fillRect(-particle.size/2, -particle.size/2, particle.size, particle.size);
       this.confettiContext.restore();
 
-      // Remove particles that are off screen
       if (particle.y > this.confettiCanvas.height + 50) {
         this.particles.splice(index, 1);
       }
@@ -244,40 +213,22 @@ class ResultPage {
   }
 
   bindEvents() {
-    // Back button
-    document.getElementById('back-btn').addEventListener('click', () => {
-      window.history.back();
-    });
-
-    // Replay button
-    document.getElementById('replay-btn').addEventListener('click', () => {
-      window.location.href = 'game.html';
-    });
-
-    // Download Achievement button
+    document.getElementById('back-btn').addEventListener('click', () => window.history.back());
+    document.getElementById('replay-btn').addEventListener('click', () => window.location.href = 'game.html');
     document.getElementById('achievement-btn').addEventListener('click', () => this.downloadAchievement());
+    document.getElementById('share-btn').addEventListener('click', () => this.shareResults());
+    document.getElementById('home-btn').addEventListener('click', () => window.location.href = 'index.html');
 
-    // Share button
-    document.getElementById('share-btn').addEventListener('click', () => {
-      this.shareResults();
-    });
-
-    // Home button
-    document.getElementById('home-btn').addEventListener('click', () => {
-      window.location.href = 'index.html';
-    });
- 
-    // Recommendation cards
     document.querySelectorAll('#recommendations .group').forEach((card, index) => {
+      const articles = ['article-hiv.html', 'article-discharge.html', 'article-menstruation.html'];
       card.addEventListener('click', () => {
-        // Navigate to specific article based on index
-        const articles = ['article-hiv.html', 'article-discharge.html', 'article-menstruation.html'];
         if (articles[index]) {
           window.location.href = articles[index];
         }
       });
     });
   }
+
   downloadAchievement() {
     const achievementElement = document.createElement('div');
     achievementElement.style.position = 'fixed';
@@ -319,30 +270,22 @@ class ResultPage {
         url: window.location.origin + '/index.html'
       }).catch(console.error);
     } else {
-      // Fallback to copying to clipboard
       navigator.clipboard.writeText(shareText).then(() => {
         this.showShareFeedback();
       }).catch(() => {
-        // Fallback for older browsers
         this.openShareModal();
       });
     }
   }
 
   showShareFeedback() {
-    // Create temporary feedback element
     const feedback = document.createElement('div');
     feedback.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
     feedback.textContent = 'Teks berhasil disalin!';
     document.body.appendChild(feedback);
 
-    // Animate feedback
-    gsap.fromTo(feedback, 
-      { opacity: 0, y: -20 },
-      { opacity: 1, y: 0, duration: 0.3 }
-    );
+    gsap.fromTo(feedback, { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.3 });
 
-    // Remove after 3 seconds
     setTimeout(() => {
       gsap.to(feedback, {
         opacity: 0,
@@ -354,7 +297,6 @@ class ResultPage {
   }
 
   openShareModal() {
-    // Simple fallback - open social media links
     const shareUrl = encodeURIComponent(window.location.origin + '/index.html');
     const shareText = encodeURIComponent(`Aku baru saja menyelesaikan game Mitos vs Fakta di RISA dan mendapat skor ${this.results.score}!`);
     
@@ -364,14 +306,9 @@ class ResultPage {
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`
     };
 
-    // For simplicity, just open WhatsApp
     window.open(socialLinks.whatsapp, '_blank');
   }
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  new ResultPage();
-});
-
-export default ResultPage;
+// init page
+new ResultPage();

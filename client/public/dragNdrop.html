@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RISA | Myth VS Fact</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+ <style>
+    :root{
+      --primary: #F89BB1; /* branding */
+      --white: #ffffff;
+    }
+    body { background: linear-gradient(180deg, #fff 0%, rgba(248,155,177,0.06) 100%); }
+
+    /* clone while dragging */
+    .drag-clone {
+      position: fixed;
+      pointer-events: none;
+      transform-origin: top left;
+      z-index: 9999 !important;
+      will-change: transform;
+      border-radius: 12px;
+      box-shadow: 0 30px 60px rgba(9,10,31,0.18);
+    }
+
+    .dropzone {
+      transition: box-shadow .18s, transform .18s, background-color .18s;
+    }
+    .dropzone.active {
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12), 0 0 28px rgba(248,155,177,0.18);
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    /* trophy shine */
+    .trophy {
+      filter: drop-shadow(0 10px 30px rgba(248,155,177,0.25));
+    }
+
+    /* progress neon */
+    .progress-inner {
+      background: linear-gradient(90deg, rgba(248,155,177,1), rgba(255,255,255,0.9));
+      box-shadow: 0 6px 18px rgba(248,155,177,0.18);
+    }
+  </style>
+  <link rel="stylesheet" href="../src/css/button.css">
+  <audio id="bgMusic" src="./media/backsoundGame.mp3" loop></audio>
+</head>
+
+<body class="min-h-screen flex items-start justify-center py-12 relative overflow-visible">
+
+  <!-- Full background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-b from-pink-300/70 via-pink-100 to-pink-50 -z-20 min-h-screen"></div>
+
+  <!-- 3D Bubble decorations -->
+  <div class="absolute top-10 left-10 w-40 h-40 bg-pink-200 rounded-full opacity-40 blur-3xl -z-10 shadow-[0_20px_60px_rgba(248,155,177,0.4)] animate-pulse"></div>
+  <div class="absolute bottom-20 right-20 w-52 h-52 bg-pink-300 rounded-full opacity-30 blur-2xl -z-10 shadow-[0_25px_70px_rgba(248,155,177,0.3)] animate-bounce"></div>
+  <div class="absolute top-1/3 right-1/3 w-28 h-28 bg-pink-100 rounded-full opacity-40 blur-2xl -z-10 shadow-[0_15px_50px_rgba(248,155,177,0.35)] animate-ping"></div>
+
+  <div class="w-full max-w-4xl px-4 relative z-10">
+    <!-- Header -->
+    <div class="flex items-center gap-4 mb-6">
+      <button id="backBtn" 
+        class="w-12 h-12 flex items-center justify-center 
+               rounded-full bg-pink-400 text-white 
+               shadow-md hover:shadow-lg hover:bg-pink-500 
+               transition-all duration-300 transform hover:-translate-x-1">
+        ⬅
+      </button>
+
+      <div>
+        <h1 class="text-3xl font-extrabold text-pink-500 drop-shadow-md">
+          Mitos atau Fakta? Yuk, Buktikan!
+        </h1>
+        <p class="text-sm text-gray-600">
+          Banyak remaja percaya mitos tentang kesehatan reproduksi. 
+          Coba main game ini, apakah kamu bisa bedakan mana yang fakta dan mana yang cuma mitos?
+        </p>
+      </div>
+    </div>
+
+
+    <!-- Progress -->
+    <div class="mb-6">
+      <div class="flex justify-between mb-2 text-sm">
+        <div id="progressText">Pertanyaan 1 dari 5</div>
+        <div id="scoreText">Skor: 0/5</div>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+        <div id="progressBar" class="h-3 progress-inner rounded-full" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="mb-8 perspective">
+      <div id="statementCard"
+        class="bg-white rounded-xl p-6 shadow-2xl cursor-grab select-none transform transition-transform duration-300">
+        <p id="statementText" class="text-xl font-semibold">...</p>
+        <p class="text-xs text-gray-400 mt-3">Drag me — or tap the buttons below.</p>
+      </div>
+    </div>
+
+    <!-- Dropzones -->
+    <div class="grid md:grid-cols-2 gap-6">
+      <div id="mythZone" class="dropzone relative p-6 rounded-2xl text-center border-2 border-pink-200 
+                  bg-gradient-to-br from-pink-50 to-white shadow-lg cursor-pointer 
+                  transition-transform duration-300 hover:scale-[1.05]" data-type="myth">
+        <div class="relative">
+          <div
+            class="w-20 h-20 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl shadow-inner">
+            ❌
+          </div>
+          <h3 class="text-2xl font-extrabold text-red-500 tracking-wide">MITOS</h3>
+          <p class="text-sm text-gray-600 mt-2">Seret kesini jika itu mitos</p>
+        </div>
+      </div>
+
+      <div id="factZone" class="dropzone relative p-6 rounded-2xl text-center border-2 border-green-200 
+                  bg-gradient-to-br from-green-50 to-white shadow-lg cursor-pointer 
+                  transition-transform duration-300 hover:scale-[1.05]" data-type="fact">
+        <div class="relative">
+          <div
+            class="w-20 h-20 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center text-3xl shadow-inner">
+            ✅
+          </div>
+          <h3 class="text-2xl font-extrabold text-green-600 tracking-wide">FAKTA</h3>
+          <p class="text-sm text-gray-600 mt-2">Seret kesini jika itu fakta</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action -->
+    <div class="flex gap-4 justify-center mt-8">
+      <button id="btnMitos" class="button-11 px-5 py-2 border rounded hover:bg-red-50">Ini MITOS</button>
+      <button id="btnFakta" class="button-10 px-6 py-2 border rounded hover:bg-green-50">Ini FAKTA</button>
+    </div>
+
+
+  </div>
+
+  <!-- Result overlay -->
+ 
+
+  <!-- Audio -->
+  <audio id="correctSound" src="./media/correctAnswer.mp3"></audio>
+  <audio id="wrongSound" src="./media/wrongAnswer.mp3"></audio>
+
+  <script type="module" src="../src/js/dragNdrop.js"></script>
+</body>
+
+</html>

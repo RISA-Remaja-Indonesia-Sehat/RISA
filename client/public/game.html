@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- GSAP -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- Fun Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../src/css/button.css" />
+    <title>RISA | Mini games</title>
+    <style>
+      
+      .gsap-fade-slide {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      .gsap-scale-in {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      .gsap-fade-slide-up {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    </style>
+  </head>
+
+  <body class="bg-gradient-to-br from-pink-100 via-white to-yellow-100">
+    <header id="navbar"></header>
+
+    <!-- HERO -->
+    <section
+      id="hero"
+      class="w-full py-16 px-6 md:px-16 flex flex-col md:flex-row items-center justify-between bg-pink-100/90"
+    >
+      <div class="md:w-1/2 space-y-6">
+        <h1 class="text-4xl md:text-6xl font-bold text-pink-600 gsap-fade-slide">
+          Yuk, Main & Jadi Juara!
+        </h1>
+        <p class="text-gray-700 gsap-fade-slide text-lg">
+          Kumpulin poin, seru-seruan, dan lihat siapa yang juara di leaderboard!
+        </p>
+        <div class="flex gap-4 gsap-fade-slide">
+          <button class="button-11 px-4 py-2 animate-pulse-slow" role="button">
+            <a class="text" href="#games">Mainkan Sekarang!</a>
+          </button>
+          <button id="leaderboardBtn" class="button-10 px-4 py-2">
+            Leaderboard
+          </button>
+        </div>
+      </div>
+      <div class="md:w-1/2 mt-6 md:mt-0 flex justify-center gsap-scale-in">
+        <img
+          src="./media/Illustration_hero_gamification.png"
+          alt="Hero Illustration"
+          class="max-h-80 drop-shadow-xl"
+        />
+      </div>
+    </section>
+
+    <!-- GAMES -->
+    <main class="max-w-screen mx-auto px-4 md:px-6 lg:px-8 py-8 space-y-16">
+      <section id="games" class="w-full py-10 px-6 md:px-16 flex flex-col items-center">
+        <h2 class="text-3xl font-extrabold text-pink-700 mb-8 gsap-fade-slide">
+          🎮 Pilih Game Kamu
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          <a id="playNowBtn" href="./dragNdrop.html">
+            <img src="./media/game.png" alt="Game" class="mx-auto rounded-xl shadow-lg gsap-scale-in hover:scale-105 transition-transform" />
+          </a>
+          <a id="playNowBtn" href="./dragNdrop.html">
+            <img src="./media/game.png" alt="Game" class="mx-auto rounded-xl shadow-lg gsap-scale-in hover:scale-105 transition-transform" />
+          </a>
+          <a id="playNowBtn" href="./dragNdrop.html">
+            <img src="./media/game.png" alt="Game" class="mx-auto rounded-xl shadow-lg gsap-scale-in hover:scale-105 transition-transform" />
+          </a>
+          <a id="playNowBtn" href="./dragNdrop.html">
+            <img src="./media/game.png" alt="Game" class="mx-auto rounded-xl shadow-lg gsap-scale-in hover:scale-105 transition-transform" />
+          </a>
+       
+        </div>
+      </section>
+
+      <!-- ACHIEVEMENT (tetap seperti sebelumnya, biar konsisten) -->
+      <section class="py-10 px-6 md:px-16 text-center">
+        <div class="mb-2 flex flex-col justify-center items-center">
+          <svg viewBox="0 0 400 350" class="w-[400px] h-[180px] gsap-fade-slide">
+            <defs>
+              <path id="curveSelamat" d="M 0,300 A 300,200 0 0 1 400,300" />
+            </defs>
+            <text fill="black" font-size="80" font-weight="bold" text-anchor="middle">
+              <textPath startOffset="50%" href="#curveSelamat">Selamat</textPath>
+            </text>
+          </svg>
+          <img
+            id="trophy"
+            src="./media/piala.png"
+            class="relative gsap-scale-in mt-6"
+            style="transform-origin: center center"
+            alt="Trophy"
+          />
+          <p class="mt-4 text-lg font-semibold text-black bg-pink-300 px-4 py-1 border-2 border-black shadow-md">
+            Kamu mendapatkan peringkat ke-1 minggu ini
+          </p>
+        </div>
+      </section>
+
+      <!-- LEADERBOARD -->
+      <section id="leaderboard" class="py-10 px-6 md:px-16">
+        <h2 class="text-3xl font-bold text-pink-600 mb-6 gsap-fade-slide">🏆 Leaderboard</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full bg-white rounded-xl shadow-lg overflow-hidden">
+            <thead class="bg-pink-200 text-gray-900">
+              <tr>
+                <th class="py-3 px-4 text-left">Rank</th>
+                <th class="py-3 px-4 text-left">Name</th>
+                <th class="py-3 px-4 text-left">Poin</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-pink-100">
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">🥇</td><td class="py-3 px-4">Rachel Green</td><td class="py-3 px-4">1023</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">🥈</td><td class="py-3 px-4">Robert Thomson</td><td class="py-3 px-4">985</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">🥉</td><td class="py-3 px-4">Monica Geller</td><td class="py-3 px-4">882</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">4</td><td class="py-3 px-4">Joey Tribbiani</td><td class="py-3 px-4">820</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">5</td><td class="py-3 px-4">Chandler Bing</td><td class="py-3 px-4">759</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">6</td><td class="py-3 px-4">Phoebe Buffay</td><td class="py-3 px-4">640</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">7</td><td class="py-3 px-4">Ross Geller</td><td class="py-3 px-4">532</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">8</td><td class="py-3 px-4">Janice Hosenstein</td><td class="py-3 px-4">410</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer"></footer>
+
+    <script>
+      // GSAP animations
+      gsap.utils.toArray(".gsap-fade-slide").forEach((el, i) => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: i * 0.2,
+          ease: "back.out(1.7)"
+        });
+      });
+
+      gsap.utils.toArray(".gsap-scale-in").forEach((el, i) => {
+        gsap.to(el, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          delay: 0.5 + i * 0.2,
+          ease: "elastic.out(1, 0.6)"
+        });
+      });
+
+      gsap.utils.toArray(".gsap-fade-slide-up").forEach((el, i) => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: 1 + i * 0.1,
+          ease: "power2.out"
+        });
+      });
+    </script>
+
+    <script type="module" src="../src/js/game.js"></script>
+  </body>
+</html>
