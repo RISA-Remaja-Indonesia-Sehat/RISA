@@ -1,11 +1,33 @@
 const statements = [
-  { text: "Menstruasi adalah proses normal dan sehat pada wanita", correct: "fact" },
-  { text: "Wanita yang sedang menstruasi tidak boleh berenang", correct: "myth" },
-  { text: "Vaksin HPV dapat mencegah kanker serviks", correct: "fact" },
-  { text: "PMS hanya ada di 'pikiran' saja", correct: "myth" },
-  { text: "Olahraga dapat membantu mengurangi nyeri menstruasi", correct: "fact" }
+  { 
+    text: "Menstruasi adalah proses normal dan sehat pada wanita", 
+    correct: "fact",
+    explanation: "Menstruasi adalah proses alami sebagai bagian dari siklus reproduksi. Tidak berbahaya dan tanda tubuh sehat."
+  },
+  { 
+    text: "Wanita yang sedang menstruasi tidak boleh berenang", 
+    correct: "myth",
+    explanation: "Wanita tetap boleh berenang saat menstruasi, asal menggunakan perlindungan yang tepat seperti tampon atau menstrual cup."
+  },
+  { 
+    text: "Vaksin HPV dapat mencegah kanker serviks", 
+    correct: "fact",
+    explanation: "Vaksin HPV terbukti efektif mencegah infeksi virus HPV penyebab utama kanker serviks."
+  },
+  { 
+    text: "PMS hanya ada di 'pikiran' saja", 
+    correct: "myth",
+    explanation: "PMS nyata, disebabkan oleh perubahan hormon yang bisa memengaruhi fisik dan emosi."
+  },
+  { 
+    text: "Olahraga dapat membantu mengurangi nyeri menstruasi", 
+    correct: "fact",
+    explanation: "Aktivitas fisik membantu melancarkan peredaran darah dan merangsang endorfin yang mengurangi rasa sakit."
+  }
 ];
 
+
+localStorage.removeItem('quizResult');
 let currentIndex = 0;
 let score = 0;
 let startTime = Date.now();
@@ -41,9 +63,9 @@ function renderStatement() {
   progressBar.style.width = `${((currentIndex + 1) / statements.length) * 100}%`;
 }
 
-   const bgMusic = document.getElementById("bgMusic");
-    bgMusic.volume = 0.5;
-    bgMusic.play().catch(() => console.log("Autoplay blocked"));
+const bgMusic = document.getElementById("bgMusic");
+bgMusic.volume = 0.5;
+bgMusic.play().catch(() => console.log("Autoplay blocked"));
 
 /* ==========================
    GSAP dropzone pulse
@@ -129,18 +151,52 @@ export function calculatePoints() {
 }
 
 
+function formatDuration(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
 
 function endGame() {
+  const endTime = Date.now();
+  let duration = Math.floor((endTime - startTime) / 1000);
+
+  // hitung benar & salah
+  let correct = 0;
+  let wrong = 0;
+
+  const formattedAnswers = answersLog.map((ans, idx) => {
+    const statement = statements[idx];
+    const isCorrect = ans.userAnswer === statement.correct;
+
+    if (isCorrect) correct++;
+    else wrong++;
+
+    return {
+  statement: {
+    text: statement.text,
+    correct: statement.correct,
+    explanation: statement.explanation
+  },
+  userAnswer: ans.userAnswer,
+  isCorrect: isCorrect
+};
+
+  });
+
   const finalData = {
     score: score,
-    total: statements.length,
-    points: calculatePoints(),
-    answers: answersLog
+    correct: correct,
+    wrong: wrong,
+    duration: formatDuration(duration),
+    answers: formattedAnswers
   };
 
-  localStorage.setItem('quizResult', JSON.stringify(finalData))
- window.location.href = './result2.html'
+  localStorage.setItem('quizResult', JSON.stringify(finalData));
+  window.location.href = './result.html';
 }
+
+
 
 
 /* ==========================
@@ -258,11 +314,6 @@ function onPointerUp(e) {
 document.getElementById('btnMitos').addEventListener('click', () => answer('myth'));
 document.getElementById('btnFakta').addEventListener('click', () => answer('fact'));
 
-document.getElementById('playAgain').addEventListener('click', () => {
-  resultOverlay.classList.add('hidden');
-  currentIndex = 0; score = 0; startTime = Date.now();
-  renderStatement();
-});
 
 
 

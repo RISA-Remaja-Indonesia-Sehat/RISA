@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <title>Menstruasi Pertama: Kenapa Bisa Terjadi dan Gak Usah Takut!</title>
+    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="../src/css/button.css">
+</head>
+<body>
+    <header id="navbar"></header>
+
+    <!--Artikel-->
+    <section class="container my-12 mx-auto lg:flex items-center gap-6 overflow-hidden" id="article">
+        <div class="p-6">
+            <img src="./media/article-image-3.png" class="w-full lg:w-4xl mb-4" alt="Image 3">
+
+            <h1 class="mt-12 font-bold text-2xl md:text-3xl">Menstruasi Pertama: Kenapa Bisa Terjadi dan Gak Usah Takut!</h1>
+
+            <div class="prose max-w-none mt-4">
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    <strong>Nina</strong>, seorang remaja perempuan berusia 13 tahun, sedang asyik belajar di kamarnya saat tiba-tiba dia merasakan sesuatu yang berbeda. Dia melihat ada bercak darah di celana dalamnya. Panik dan bingung, Nina merasa takut dan malu. Dia bahkan sempat berpikir, “Apakah aku sakit? Apakah aku kotor?”
+                </p>
+
+                <div class="bg-pink-50 p-6 rounded-lg mb-6 border border-pink-100">
+                    <h3 class="text-lg font-semibold text-pink-800 mb-4 flex items-center">
+                        <span class="text-2xl mr-2">💭</span>
+                        Pertanyaan untuk Kamu Renungkan:
+                    </h3>
+                    <ol class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="bg-pink-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5 flex-shrink-0">1</span>
+                            <span>Menurutmu, jika Nina mempelajari tentang menstruasi sebelum ini terjadi, apakah dia akan merasa lebih tenang dan tidak panik?</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-pink-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5 flex-shrink-0">2</span>
+                            <span>Apakah menstruasi itu sesuatu yang kotor atau sesuatu yang alami dan sehat?</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="bg-pink-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-medium mr-3 mt-0.5 flex-shrink-0">3</span>
+                            <span>Bagaimana sebaiknya kita menyikapi perubahan tubuh seperti menstruasi agar tetap percaya diri?</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">🔍</span>
+                    Apa Itu Menstruasi?
+                </h2>
+                <div class="text-gray-700 leading-relaxed mb-6">
+                    Menstruasi adalah proses alami yang terjadi pada tubuh perempuan saat masa pubertas
+                    <div class="inline relative">
+                        <span class="text-blue-600 cursor-pointer font-bold" onclick="toggleTooltip()">*</span>
+                        <div id="tooltip" class="hidden absolute ml-2 bg-white rounded-lg p-3 text-sm text-gray-700 border border-gray-500 shadow-md z-10 max-w-xs">
+                        Pubertas: Masa perubahan fisik dan hormonal saat anak-anak mulai berubah jadi remaja.
+                    </div>
+                    </div>. Ini adalah tanda bahwa tubuh mulai siap untuk suatu saat nanti bisa hamil. Setiap bulan, rahim mempersiapkan diri dengan melapisi dindingnya dengan darah dan jaringan khusus. Jika tidak ada pembuahan, lapisan ini akan luruh dan keluar dari tubuh melalui vagina — itulah yang kita sebut haid atau menstruasi.
+
+                    
+                </div>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">🩸</span>
+                    Kenapa Menstruasi Bisa Terjadi Mendadak?
+                </h2>
+                <p class="text-gray-700 mb-4">
+                    Perubahan pubertas biasanya terjadi secara bertahap, seperti tumbuhnya payudara atau perubahan suara. Tapi menstruasi bisa datang tiba-tiba dan membuat bingung, bahkan menakutkan, terutama jika kamu belum siap atau belum tahu apa yang terjadi. Itulah kenapa penting banget buat kamu belajar tentang menstruasi sebelum mengalaminya.
+                </p>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">👧</span>
+                    Perubahan Tubuh yang Terjadi Saat Menstruasi
+                </h2>
+                <p class="text-gray-700 mb-4">Selain keluarnya darah, kamu mungkin juga merasakan beberapa gejala seperti perut kram, mood yang berubah-ubah, atau rasa lelah. Semua itu normal dan bagian dari proses tubuhmu menyesuaikan diri.</p>
+                
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    Tips Menghadapi Menstruasi Pertama
+                </h2>
+                <ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+                    <li>Jangan panik, ini hal alami yang dialami semua perempuan.</li>
+                    <li>Siapkan pembalut atau alat kebersihan lain yang nyaman.</li>
+                    <li>Jangan malu bertanya pada orang dewasa yang kamu percaya, seperti ibu atau guru.</li>
+                    <li>Jaga kebersihan agar tetap sehat dan nyaman.</li>
+                </ul>
+
+                
+                <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        Kata Teman-Temanmu
+                    </h3>
+                    <div class="space-y-3 text-sm text-gray-600">
+                        <p>
+                            <strong>Lia, 14 tahun</strong> - “Waktu haid pertama aku juga kaget, tapi setelah tahu apa itu menstruasi, aku jadi gak takut lagi.” 
+                        </p>
+                        <p>
+                            <strong>Sari, 15 tahun</strong> - “Aku selalu siapin pembalut di tas, jadi kalau haid datang gak panik.” 
+                        </p>
+                        <p>
+                            <strong>Nina, 13 tahun</strong> - “Aku senang bisa cerita sama ibu, jadi aku gak merasa sendirian.”
+                        </p>
+                    </div>
+                </div>
+
+                <p class="text-gray-700 mb-4">Menstruasi itu alami dan sehat, girls! Yuk, kenali tubuhmu, siap-siap, dan jangan takut menghadapi perubahan ini. Kamu keren karena sudah mulai dewasa dan tahu cara jaga diri!</p>
+
+                <div class="border-1 border-transparent border-t-gray-200 p-6 rounded-lg mb-1">
+                    <div class="space-y-3 text-sm text-gray-600 ">
+                        <p>
+                            <strong>Menstruasi:</strong> Proses keluarnya darah dan jaringan dari rahim melalui vagina yang menandai kesiapan tubuh perempuan secara reproduksi. 
+                        </p>
+                        <p><strong>* Pubertas:</strong> Masa perubahan fisik dan hormonal saat anak-anak mulai berubah jadi remaja.</p>
+                    </div>
+                </div>
+
+
+                <div class="p-6">
+                    <h3 class="font-medium text-blue-800 mb-4 flex items-center">
+                        Sumber Referensi:
+                    </h3>
+                    <div class="space-y-2">
+                        <a href="https://www.who.int/health-topics/adolescent-health#tab=tab_1" target="_blank" class="block text-blue-600 hover:text-blue-800 underline transition-colors">🔗 World Health Organization (WHO): [Adolescent health and development]</a>
+                        <a href="https://www.cdc.gov/healthywater/hygiene/menstruation/index.html" target="_blank" class="block text-blue-600 hover:text-blue-800 underline transition-colors">🔗 Centers for Disease Control and Prevention (CDC): [Menstruation and Your Period]</a>
+                        <a href="https://www.unicef.org/wash/menstrual-hygiene-management" target="_blank" class="block text-blue-600 hover:text-blue-800 underline transition-colors">🔗 UNICEF: [Menstrual Hygiene Management]</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <button class="button-10 text-sm font-semibold px-3 py-2 flex items-center gap-4" role="button">
+                    <span>Bagikan</span>
+                    <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/share--v1.png" alt="share--v1"/>
+                </button>
+            </div>
+        </div>
+
+        <!-- Game -->
+        <aside class="bg-white rounded-sm shadow-lg h-fit max-w-72 lg:max-w-1/5 p-6 ml-4">
+            <div>
+                <h4 class="mb-2 font-medium">Drag & Drop Challenge</h4>
+                <img src="./media/game-item.png" alt="Game Item" class="mb-4">
+
+                <a href="#">
+                    <button class="button-10 text-xs px-4 py-2" role="button">
+                        <span>Coba Sekarang</span>
+                    </button>
+                </a>
+            </div>
+        </aside>
+    </section>
+
+    <!-- Fitur Komentar -->
+    <section class="container my-12 pt-12 border-1 border-transparent border-t-gray-200 mx-auto px-4">
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">💬 Bagikan Pengalamanmu</h3>
+            <p class="text-gray-600 mb-6">Ceritakan apa yang sudah kamu pelajari atau hal yang masih ingin kamu tahu</p>
+            
+            <form id="comment-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama (opsional)</label>
+                    <input type="text" id="user-name" placeholder="Tulis nama atau inisial kamu..." class="w-full px-3 py-2 border border-gray-300 rounded focus:border-pink-400 focus:outline-none">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Apa yang kamu pelajari hari ini?</label>
+                    <textarea id="user-comment" rows="3" placeholder="Bagikan pemikiran atau pertanyaan kamu..." class="w-full px-3 py-2 border border-gray-300 rounded focus:border-pink-400 focus:outline-none resize-none"></textarea>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button type="submit" class="button-10 text-sm px-4 py-2" role="button">
+                        <span>Kirim</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="">
+            <h4 class="text-lg font-semibold text-gray-800 mb-4">Komentar</h4>
+            <div id="comments" class="space-y-3">
+                <!-- Comments will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer"></footer>
+
+    <script type="module" src="../src/js/index.js"></script>
+    <script type="module" src="../src/js/hiv-quiz.js"></script>
+</body>
+</html>
