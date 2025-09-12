@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <title>HIV? Gak Usah Panik, Yuk Kenalan Dulu!</title>
+    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="../src/css/button.css">
+</head>
+<body>
+    <header id="navbar"></header>
+
+    <!--Artikel-->
+    <section class="container my-12 mx-auto lg:flex items-center gap-6 overflow-hidden" id="article">
+        <div class="p-6">
+            <div class="w-full h-56 md:h-84 bg-[url('./media/article-image-1.png')] bg-cover bg-center mb-4"></div>
+
+            <h1 class="mt-12 font-bold text-2xl md:text-3xl">HIV? Gak Usah Panik, Yuk Kenalan Dulu!</h1>
+
+            <div class="prose max-w-none">
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Kamu lagi ngobrol santai sama temen di sekolah, terus tiba-tiba ada yang bilang: <br>
+                    <em>"Eh, kamu tau gak sih soal HIV? Katanya sih serem banget."</em> <br>
+                    Kamu jadi penasaran dan mikir, "Sebenarnya HIV itu apa sih? Kok bisa dibilang serem?"
+                </p>
+
+                <div class="bg-gradient-to-br from-pink-50 to-rose-50 p-6 rounded-2xl border border-pink-100 shadow-sm mb-6">
+                    <h3 class="text-lg font-semibold text-pink-800 mb-4 flex items-center">
+                        <span class="text-2xl mr-2">💭</span>
+                        Nah, kamu punya tiga pilihan nih:
+                    </h3>
+                    
+                    <form id="hiv-quiz" class="space-y-4">
+                        <div class="space-y-3">
+                            <label class="flex items-start p-4 bg-white rounded-xl border-2 border-transparent hover:border-pink-200 cursor-pointer transition-all duration-200 group">
+                                <input type="radio" name="mini-story" value="1" class="mt-1 mr-3 text-pink-500 focus:ring-pink-400">
+                                <span class="text-gray-700 group-hover:text-pink-700 transition-colors">
+                                    <strong>Cuekin aja</strong>, takutnya malah makin bingung.
+                                </span>
+                            </label>
+                            
+                            <label class="flex items-start p-4 bg-white rounded-xl border-2 border-transparent hover:border-pink-200 cursor-pointer transition-all duration-200 group">
+                                <input type="radio" name="mini-story" value="2" class="mt-1 mr-3 text-pink-500 focus:ring-pink-400">
+                                <span class="text-gray-700 group-hover:text-pink-700 transition-colors">
+                                    <strong>Percaya aja</strong> sama cerita orang, toh semua sama aja.
+                                </span>
+                            </label>
+                            
+                            <label class="flex items-start p-4 bg-white rounded-xl border-2 border-transparent hover:border-pink-200 cursor-pointer transition-all duration-200 group">
+                                <input type="radio" name="mini-story" value="3" class="mt-1 mr-3 text-pink-500 focus:ring-pink-400">
+                                <span class="text-gray-700 group-hover:text-pink-700 transition-colors">
+                                    <strong>Cari tahu lebih dalam</strong> supaya gak salah paham.
+                                </span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-semibold py-3 px-6 rounded-xl hover:from-pink-600 hover:to-rose-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                            <span class="flex items-center justify-center">
+                                <span class="mr-2">✨</span>
+                                Lihat Jawabanku!
+                            </span>
+                        </button>
+                    </form>
+                    
+                    <!-- Loading Screen -->
+                    <div id="loading-screen" class="hidden text-center py-8">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-pink-500 mb-4"></div>
+                        <p class="text-pink-700 font-medium">AI lagi ngecek pilihan kamu, tunggu sebentar ya… ⏳</p>
+                    </div>
+                    
+                    <!-- Feedback -->
+                    <div id="feedback" class="hidden mt-6 p-4 rounded-xl border-l-4">
+                        <p id="feedback-text" class="font-medium"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">🔬</span>
+                    Apa sih HIV itu?
+                </h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    HIV singkatan dari <strong>Human Immunodeficiency Virus</strong>, yaitu virus yang menyerang sistem kekebalan tubuh kita. Sistem kekebalan ini ibarat tentara yang melindungi tubuh dari penyakit. Kalau kena HIV, tentara ini jadi lemah, jadi tubuh gampang sakit.
+                </p>
+                <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6 rounded-r-lg">
+                    <p class="text-blue-800 font-medium">
+                        💡 <strong>Good News:</strong> HIV itu bukan penyakit yang langsung bikin kamu sakit parah. HIV bisa dikontrol dengan obat, jadi orang yang hidup dengan HIV bisa tetap sehat dan aktif.
+                    </p>
+                </div>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">🦠</span>
+                    Gimana sih cara penularan HIV?
+                </h2>
+                <p class="text-gray-700 mb-4">HIV bisa menular lewat:</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-700 mb-4 ml-4">
+                    <li class="relative">Hubungan seksual tanpa perlindungan yang aman<span class="text-blue-600 cursor-pointer font-bold" onclick="toggleTooltip()">*</span>
+                        <div id="tooltip" class="hidden absolute ml-2 bg-white rounded-lg p-3 text-sm text-gray-700 border border-gray-500 shadow-md z-10 max-w-xs">
+                            Hubungan seksual tanpa perlindungan yang aman: Hubungan yang berisiko menularkan HIV jika tidak dilakukan dengan cara yang benar dan aman.
+                        </div>
+                    </li>
+                    <li>Berbagi jarum suntik yang tidak steril</li>
+                    <li>Dari ibu ke bayi saat hamil, melahirkan, atau menyusui</li>
+                </ul>
+                <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6 rounded-r-lg">
+                    <p class="text-green-800 font-medium">
+                        ✅ <strong>Yang Aman:</strong> HIV tidak menular lewat sentuhan biasa, pelukan, cipika-cipiki, atau berbagi makanan.
+                    </p>
+                </div>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">👩</span>
+                    Kenapa penting buat remaja perempuan tahu soal HIV?
+                </h2>
+                <p class="text-gray-700 mb-4">Karena kamu lagi di usia yang mulai mengenal dunia pertemanan dan masa depan. Dengan tahu soal HIV, kamu bisa:</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-700 mb-6 ml-4">
+                    <li>Jaga diri supaya gak tertular</li>
+                    <li>Bantu teman yang mungkin butuh dukungan</li>
+                    <li>Jadi pahlawan kecil yang sebarkan info benar, bukan hoaks</li>
+                </ul>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="text-3xl mr-3">🛡️</span>
+                    Cara melindungi diri dari HIV:
+                </h2>
+                <div class="grid gap-4 mb-6">
+                    <div class="bg-pink-50 p-4 rounded-lg border border-pink-200">
+                        <p class="text-pink-800">• Hindari berbagi jarum suntik atau alat yang bisa menularkan virus</p>
+                    </div>
+                    <div class="bg-pink-50 p-4 rounded-lg border border-pink-200">
+                        <p class="text-pink-800 relative">• Lakukan tes<span class="text-blue-600 cursor-pointer font-bold text-xs align-super" onclick="toggleHivTooltip()">#</span> HIV kalau merasa perlu, supaya tahu status kesehatanmu
+                            <div id="hiv-tooltip" class="hidden absolute ml-2 bg-white rounded-lg p-3 text-sm text-gray-700 border border-gray-500 shadow-md z-10 max-w-xs">
+                                Tes HIV: Pemeriksaan untuk mengetahui apakah seseorang terinfeksi virus HIV atau tidak.
+                            </div>
+                        </p>
+                    </div>
+                    <div class="bg-pink-50 p-4 rounded-lg border border-pink-200">
+                        <p class="text-pink-800">• Bicara terbuka dengan orang dewasa yang kamu percaya</p>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        Kata Teman-Temanmu
+                    </h3>
+                    <div class="space-y-3 text-sm text-gray-600">
+                        <p><strong>Nina, 17 tahun</strong> - “Awalnya aku takut banget sama HIV, tapi setelah cari tahu, aku jadi ngerti pentingnya jaga diri dan gak gampang percaya mitos.”</p>
+                        <p><strong>Rani, 16 tahun</strong> - “Aku pernah ikut tes HIV bareng temen, rasanya biasa aja kok, malah jadi lebih tenang.”</p>
+                        <p><strong>Sari, 18 tahun</strong> - “Kalau kamu bingung, jangan malu tanya ke guru BK atau orang dewasa yang kamu percaya. Mereka pasti bantu.”</p>
+                    </div>
+                </div>
+
+                <div class="border-1 border-transparent border-t-gray-200 p-6 rounded-lg mb-1">
+                    <div class="space-y-3 text-sm text-gray-600 ">
+                        <p><strong>* Hubungan seksual tanpa perlindungan yang aman:</strong> Hubungan yang berisiko menularkan HIV jika tidak dilakukan dengan cara yang benar dan aman.</p>
+                        <p><strong>HIV (Human Immunodeficiency Virus):</strong> Virus yang menyerang sistem kekebalan tubuh sehingga tubuh jadi rentan terhadap infeksi dan penyakit.</p>
+                        <p><strong><span class="text-xs align-super">#</span> Tes HIV:</strong> Pemeriksaan untuk mengetahui apakah seseorang terinfeksi virus HIV atau tidak.</p>
+                    </div>
+                </div>
+
+
+                <div class="p-6">
+                    <h3 class="font-medium text-blue-800 mb-4 flex items-center">
+                        Sumber Referensi:
+                    </h3>
+                    <div class="space-y-2">
+                        <a href="https://www.thebutterflytree.org.uk/pages/our-work/health/hiv-aids-prevention/?gad_source=1&gad_campaignid=2082070963&gbraid=0AAAAAD65tFozGYIIx47foi7TrDPJveQh9&gclid=Cj0KCQjww4TGBhCKARIsAFLXndQ2sV-GHiSoIpIIB0-uB05wCRoYp7kjfbTy4ukeGkjxLhxUCbwWJ_waAlQ0EALw_wcB" class="block text-blue-600 hover:text-blue-800 underline transition-colors">🔗 WHO - HIV/AIDS</a>
+                        <a href="https://www.unaids.org/en/frequently-asked-questions-about-hiv-and-aids" class="block text-blue-600 hover:text-blue-800 underline transition-colors">🔗 UNAIDS - Understanding HIV</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <button class="button-10 text-sm font-semibold px-3 py-2 flex items-center gap-4" role="button">
+                    <span>Bagikan</span>
+                    <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/share--v1.png" alt="share--v1"/>
+                </button>
+            </div>
+        </div>
+
+        <!-- Game -->
+        <aside class="bg-white rounded-sm shadow-lg h-fit max-w-72 lg:max-w-1/5 p-6 ml-4">
+            <div>
+                <h4 class="mb-2 font-medium">Drag & Drop Challenge</h4>
+                <img src="./media/game-item.png" alt="Game Item" class="mb-4">
+
+                <a href="#">
+                    <button class="button-10 text-xs px-4 py-2" role="button">
+                        <span>Coba Sekarang</span>
+                    </button>
+                </a>
+            </div>
+        </aside>
+    </section>
+
+    <!-- Fitur Komentar -->
+    <section class="container my-12 pt-12 border-1 border-transparent border-t-gray-200 mx-auto px-4">
+        <div class="mb-8">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">💬 Bagikan Pengalamanmu</h3>
+            <p class="text-gray-600 mb-6">Ceritakan apa yang sudah kamu pelajari atau hal yang masih ingin kamu tahu</p>
+            
+            <form id="comment-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama (opsional)</label>
+                    <input type="text" id="user-name" placeholder="Tulis nama atau inisial kamu..." class="w-full px-3 py-2 border border-gray-300 rounded focus:border-pink-400 focus:outline-none">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Apa yang kamu pelajari hari ini?</label>
+                    <textarea id="user-comment" rows="3" placeholder="Bagikan pemikiran atau pertanyaan kamu..." class="w-full px-3 py-2 border border-gray-300 rounded focus:border-pink-400 focus:outline-none resize-none"></textarea>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button type="submit" class="button-10 text-sm px-4 py-2" role="button">
+                        <span>Kirim</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="">
+            <h4 class="text-lg font-semibold text-gray-800 mb-4">Komentar</h4>
+            <div id="comments" class="space-y-3">
+                <!-- Comments will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer"></footer>
+
+    <script type="module" src="../src/js/index.js"></script>
+    <script type="module" src="../src/js/hiv-quiz.js"></script>
+</body>
+</html>
