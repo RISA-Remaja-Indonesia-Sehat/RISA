@@ -144,7 +144,7 @@ gsap.fromTo(
 
       // Footer link
       ctx.font = '18px Arial';
-      ctx.fillText('👉 Main sekarang di risa.lovable.app', canvas.width / 2, 340);
+      ctx.fillText('👉 Main sekarang di risa.app/game', canvas.width / 2, 340);
 
       // Download PNG
       canvas.toBlob((blob) => {
@@ -167,7 +167,7 @@ gsap.fromTo(
       const shareData = {
         title: "RISA Achievement",
         text: `🎉 Aku baru dapet ${achievement.points} Achievement Point di RISA! Yuk ikut main & kumpulin poin 🚀`,
-        url: "https://risa.lovable.app/play"
+        url: "https://risa.app/play"
       };
 
       if (navigator.share) {
@@ -185,3 +185,5 @@ gsap.fromTo(
 
     document.getElementById("btnDownload").addEventListener("click", generateAchievement);
     document.getElementById("btnShare").addEventListener("click", shareAchievement);
+
+    

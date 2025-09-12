@@ -1,7 +1,6 @@
 button.button-10 {
   touch-action: manipulation;
   position: relative;
-  display: inline-block;
   cursor: pointer;
   outline: none;
   border: 0;
@@ -15,7 +14,6 @@ button.button-10 {
   font-weight: 600;
   color: #382b22;
   text-transform: uppercase;
-  padding: 12px 24px;
   background: #fff0f0;
   border: 2px solid #b18597;
   border-radius: 0.75em;
@@ -56,7 +54,6 @@ button.button-10:active::before {
 button.button-11 {
   touch-action: manipulation;
   position: relative;
-  display: inline-block;
   cursor: pointer;
   outline: none;
   border: 0;
@@ -70,7 +67,6 @@ button.button-11 {
   font-weight: 600;
   color: #382b22;
   text-transform: uppercase;
-  padding: 12px 24px;
   background: #F89BB1;
   border: 2px solid #b18597;
   border-radius: 0.75em;
