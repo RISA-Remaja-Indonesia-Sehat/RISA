@@ -3,20 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Tailwind CSS CDN (optional, sesuai original) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- GSAP core + ScrollTrigger plugin CDN -->
+    <!-- GSAP -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
-    <!-- Confetti CDN -->
+    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <!-- Fun Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet" />
+
     <link rel="stylesheet" href="../src/css/button.css" />
     <title>RISA | Mini games</title>
     <style>
-      /* Optional: hide elements initially for animation */
+      
       .gsap-fade-slide {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
       }
       .gsap-scale-in {
         opacity: 0;
@@ -29,79 +32,73 @@
     </style>
   </head>
 
-  <body>
+  <body class="bg-gradient-to-br from-pink-100 via-white to-yellow-100">
     <header id="navbar"></header>
+
+    <!-- HERO -->
     <section
       id="hero"
-      class="bg-pink-200 w-full py-12 px-6 md:px-16 flex flex-col md:flex-row items-center justify-between"
+      class="w-full py-16 px-6 md:px-16 flex flex-col md:flex-row items-center justify-between bg-pink-100/90"
     >
-      <div class="md:w-1/2 space-y-4">
-        <h1
-          class="text-3xl md:text-5xl font-bold text-gray-800 gsap-fade-slide"
-        >
+      <div class="md:w-1/2 space-y-6">
+        <h1 class="text-4xl md:text-6xl font-bold text-pink-600 gsap-fade-slide">
           Yuk, Main & Jadi Juara!
         </h1>
-        <p class="text-gray-700 gsap-fade-slide">
+        <p class="text-gray-700 gsap-fade-slide text-lg">
           Kumpulin poin, seru-seruan, dan lihat siapa yang juara di leaderboard!
         </p>
         <div class="flex gap-4 gsap-fade-slide">
-          <button class="button-11 px-3 py-2" role="button">
-            <a class="text" href="#games"> Mainkan Sekarang!</a>
+          <button class="button-11 px-4 py-2 animate-pulse-slow" role="button">
+            <a class="text" href="#games">Mainkan Sekarang!</a>
           </button>
-          <button id="leaderboardBtn" class="button-10 px-3 py-2">Leaderboard</button>
+          <button id="leaderboardBtn" class="button-10 px-4 py-2">
+            Leaderboard
+          </button>
         </div>
       </div>
-      <div class="md:w-1/2 mt-6 md:mt-0 flex justify-center gsap-fade-slide">
+      <div class="md:w-1/2 mt-6 md:mt-0 flex justify-center gsap-scale-in">
         <img
           src="./media/Illustration_hero_gamification.png"
           alt="Hero Illustration"
-          class="max-h-72"
+          class="max-h-80 drop-shadow-xl"
         />
       </div>
     </section>
-    <main class="max-w-screen mx-auto px-4 md:px-6 lg:px-8 py-8 space-y-8">
-      <section
-        id="games"
-        class="w-full py-10 px-6 md:px-16 flex flex-col items-center justify-center"
-      >
-        <h2 class="text-xl font-bold mb-6">Games</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+
+    <!-- GAMES -->
+    <main class="max-w-screen mx-auto px-4 md:px-6 lg:px-8 py-8 space-y-16">
+      <section id="games" class="w-full py-10 px-6 md:px-16 flex flex-col items-center">
+        <h2 class="text-3xl font-extrabold text-pink-700 mb-8 gsap-fade-slide">
+          🎮 Pilih Game Kamu
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           <a id="playNowBtn" href="./dragNdrop.html">
-            <img
-              src="./media/game.png"
-              alt="Game"
-              class="mx-auto gsap-scale-in"
-            />
+            <img src="./media/game.png" alt="Game" class="mx-auto rounded-xl shadow-lg gsap-scale-in hover:scale-105 transition-transform" />
           </a>
-          <img
-            src="./media/game.png"
-            alt="Game"
-            class="mx-auto gsap-scale-in"
-          />
-          <img
-            src="./media/game.png"
-            alt="Game"
-            class="mx-auto gsap-scale-in"
-          />
-          <img
-            src="./media/game.png"
-            alt="Game"
-            class="mx-auto gsap-scale-in"
-          />
+          <a id="playNowBtn" href="./dragNdrop.html">
+            <img src="./media/game.png" alt="Game" class="mx-auto rounded-xl shadow-lg gsap-scale-in hover:scale-105 transition-transform" />
+          </a>
+          <a id="playNowBtn" href="./dragNdrop.html">
+            <img src="./media/game.png" alt="Game" class="mx-auto rounded-xl shadow-lg gsap-scale-in hover:scale-105 transition-transform" />
+          </a>
+          <a id="playNowBtn" href="./dragNdrop.html">
+            <img src="./media/game.png" alt="Game" class="mx-auto rounded-xl shadow-lg gsap-scale-in hover:scale-105 transition-transform" />
+          </a>
+       
         </div>
-        <div class="w-34 h-2 mt-5 bg-pink-200 rounded-lg"></div>
       </section>
-      <!-- Achievement Section -->
+
+      <!-- ACHIEVEMENT (tetap seperti sebelumnya, biar konsisten) -->
       <section class="py-10 px-6 md:px-16 text-center">
         <div class="mb-2 flex flex-col justify-center items-center">
-          <!-- Brutalist Title with Animation -->
-          <h2
-            class="selamat-title text-6xl font-extrabold uppercase tracking-widest relative z-10 bg-black text-yellow-300 px-6 py-2 border-4 border-pink-500 shadow-[8px_8px_0px_#00f]"
-          >
-            Selamat
-          </h2>
-
-          <!-- Trophy -->
+          <svg viewBox="0 0 400 350" class="w-[400px] h-[180px] gsap-fade-slide">
+            <defs>
+              <path id="curveSelamat" d="M 0,300 A 300,200 0 0 1 400,300" />
+            </defs>
+            <text fill="black" font-size="80" font-weight="bold" text-anchor="middle">
+              <textPath startOffset="50%" href="#curveSelamat">Selamat</textPath>
+            </text>
+          </svg>
           <img
             id="trophy"
             src="./media/piala.png"
@@ -109,93 +106,33 @@
             style="transform-origin: center center"
             alt="Trophy"
           />
-
-          <p
-            class="mb-4 text-lg font-semibold text-black bg-lime-300 px-4 py-1 border-2 border-black shadow-[4px_4px_0px_#f0f]"
-          >
+          <p class="mt-4 text-lg font-semibold text-black bg-pink-300 px-4 py-1 border-2 border-black shadow-md">
             Kamu mendapatkan peringkat ke-1 minggu ini
           </p>
-
-          <button id="btnShare"
-            class="relative px-6 py-3 text-xl font-bold uppercase bg-pink-500 text-white border-4 border-black shadow-[6px_6px_0px_#ff0] hover:translate-x-1 hover:translate-y-1 transition"
-          >
-            <div class="flex gap-2 items-center">
-              Bagikan
-             <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="28"
-        height="28"
-        viewBox="0 0 24 24"
-        class="fill-current"
-      >
-
-      
-        <path
-          d="M 18 2 C 16.35499 2 15 3.3549904 15 5 C 15 5.1909529 15.021791 5.3771224 15.056641 5.5585938 L 7.921875 9.7207031 C 7.3985399 9.2778539 6.7320771 9 6 9 C 4.3549904 9 3 10.35499 3 12 C 3 13.64501 4.3549904 15 6 15 C 6.7320771 15 7.3985399 14.722146 7.921875 14.279297 L 15.056641 18.439453 C 15.021555 18.621514 15 18.808386 15 19 C 15 20.64501 16.35499 22 18 22 C 19.64501 22 21 20.64501 21 19 C 21 17.35499 19.64501 16 18 16 C 17.26748 16 16.601593 16.279328 16.078125 16.722656 L 8.9433594 12.558594 C 8.9782095 12.377122 9 12.190953 9 12 C 9 11.809047 8.9782095 11.622878 8.9433594 11.441406 L 16.078125 7.2792969 C 16.60146 7.7221461 17.267923 8 18 8 C 19.64501 8 21 6.6450096 21 5 C 21 3.3549904 19.64501 2 18 2 z"
-        ></path>
-      </svg>
-            </div>
-          </button>
-           <button id="btnDownload" class="mt-5">
-      ⬇️ Download Achievement
-    </button>
         </div>
       </section>
 
-
-      <!-- Leaderboard Section -->
+      <!-- LEADERBOARD -->
       <section id="leaderboard" class="py-10 px-6 md:px-16">
-        <h2 class="text-xl font-bold mb-6">Leaderboard</h2>
+        <h2 class="text-3xl font-bold text-pink-600 mb-6 gsap-fade-slide">🏆 Leaderboard</h2>
         <div class="overflow-x-auto">
-          <table class="w-full bg-yellow-100 rounded-xl overflow-hidden">
-            <thead class="bg-yellow-200 text-gray-900">
+          <table class="w-full bg-white rounded-xl shadow-lg overflow-hidden">
+            <thead class="bg-pink-200 text-gray-900">
               <tr>
                 <th class="py-3 px-4 text-left">Rank</th>
                 <th class="py-3 px-4 text-left">Name</th>
                 <th class="py-3 px-4 text-left">Poin</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-yellow-300">
-              <tr class="gsap-fade-slide-up">
-                <td class="py-3 px-4">🥇</td>
-                <td class="py-3 px-4">Rachel Green</td>
-                <td class="py-3 px-4">1023</td>
-              </tr>
-              <tr class="gsap-fade-slide-up">
-                <td class="py-3 px-4">🥈</td>
-                <td class="py-3 px-4">Robert Thomson</td>
-                <td class="py-3 px-4">985</td>
-              </tr>
-              <tr class="gsap-fade-slide-up">
-                <td class="py-3 px-4">🥉</td>
-                <td class="py-3 px-4">Monica Geller</td>
-                <td class="py-3 px-4">882</td>
-              </tr>
-              <tr class="gsap-fade-slide-up">
-                <td class="py-3 px-4">4</td>
-                <td class="py-3 px-4">Joey Tribbiani</td>
-                <td class="py-3 px-4">820</td>
-              </tr>
-              <tr class="gsap-fade-slide-up">
-                <td class="py-3 px-4">5</td>
-                <td class="py-3 px-4">Chandler Bing</td>
-                <td class="py-3 px-4">759</td>
-              </tr>
-              <tr class="gsap-fade-slide-up">
-                <td class="py-3 px-4">6</td>
-                <td class="py-3 px-4">Phoebe Buffay</td>
-                <td class="py-3 px-4">640</td>
-              </tr>
-              <tr class="gsap-fade-slide-up">
-                <td class="py-3 px-4">7</td>
-                <td class="py-3 px-4">Ross Geller</td>
-                <td class="py-3 px-4">532</td>
-              </tr>
-              <tr class="gsap-fade-slide-up">
-                <td class="py-3 px-4">8</td>
-                <td class="py-3 px-4">Janice Hosenstein</td>
-                <td class="py-3 px-4">410</td>
-              </tr>
+            <tbody class="divide-y divide-pink-100">
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">🥇</td><td class="py-3 px-4">Rachel Green</td><td class="py-3 px-4">1023</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">🥈</td><td class="py-3 px-4">Robert Thomson</td><td class="py-3 px-4">985</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">🥉</td><td class="py-3 px-4">Monica Geller</td><td class="py-3 px-4">882</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">4</td><td class="py-3 px-4">Joey Tribbiani</td><td class="py-3 px-4">820</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">5</td><td class="py-3 px-4">Chandler Bing</td><td class="py-3 px-4">759</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">6</td><td class="py-3 px-4">Phoebe Buffay</td><td class="py-3 px-4">640</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">7</td><td class="py-3 px-4">Ross Geller</td><td class="py-3 px-4">532</td></tr>
+              <tr class="gsap-fade-slide-up"><td class="py-3 px-4">8</td><td class="py-3 px-4">Janice Hosenstein</td><td class="py-3 px-4">410</td></tr>
             </tbody>
           </table>
         </div>
@@ -203,6 +140,39 @@
     </main>
 
     <footer id="footer"></footer>
+
+    <script>
+      // GSAP animations
+      gsap.utils.toArray(".gsap-fade-slide").forEach((el, i) => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          delay: i * 0.2,
+          ease: "back.out(1.7)"
+        });
+      });
+
+      gsap.utils.toArray(".gsap-scale-in").forEach((el, i) => {
+        gsap.to(el, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          delay: 0.5 + i * 0.2,
+          ease: "elastic.out(1, 0.6)"
+        });
+      });
+
+      gsap.utils.toArray(".gsap-fade-slide-up").forEach((el, i) => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: 1 + i * 0.1,
+          ease: "power2.out"
+        });
+      });
+    </script>
 
     <script type="module" src="../src/js/game.js"></script>
   </body>
