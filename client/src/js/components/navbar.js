@@ -24,11 +24,12 @@ export function renderNavbar() {
         </button>
 
 
-        <!-- Auth Buttons (desktop) -->
-        <div class="hidden md:flex gap-2">
-          <a href="signup.html" class="px-3 py-1 border border-pink-400 text-pink-500 rounded-md hover:bg-pink-50 text-sm font-medium">Daftar</a>
-          <a href="login.html" class="px-3 py-1 bg-pink-500 text-white rounded-md hover:bg-pink-600 text-sm font-medium">Masuk</a>
-        </div>
+        <!-- Profile Icon (desktop) -->
+        <button aria-label="Profile" class="hidden md:block p-2 text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-full transition-all duration-200">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </button>
 
         <!-- Mobile Toggle -->
         <button id="menu-toggle" class="md:hidden text-gray-600 hover:text-pink-500">
@@ -43,12 +44,15 @@ export function renderNavbar() {
         <button id="menu-close" class="self-end text-gray-600 hover:text-pink-500">
           ✕
         </button>
+        <button class="p-2 text-gray-600 hover:text-pink-500 hover:bg-pink-50 rounded-full transition-all duration-200">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </button>
         <a href="index.html" class="hover:text-pink-500">Beranda</a>
         <a href="game.html" class="hover:text-pink-500">Mini Games</a>
         <a href="cycle.html" class="hover:text-pink-500">My Cycle</a>
         <a href="vaksin.html" class="hover:text-pink-500">Vaksin HPV</a>
-        <a href="signup.html" class="px-3 py-1 border border-pink-400 text-pink-500 rounded-md hover:bg-pink-50 text-sm font-medium">Daftar</a>
-        <a href="login.html" class="px-3 py-1 bg-pink-500 text-white rounded-md hover:bg-pink-600 text-sm font-medium">Masuk</a>
       </div>
     </nav>
   `;

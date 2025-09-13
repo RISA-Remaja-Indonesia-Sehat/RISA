@@ -213,8 +213,8 @@ class ResultPage {
   }
 
   bindEvents() {
-    document.getElementById('back-btn').addEventListener('click', () => window.history.back());
-    document.getElementById('replay-btn').addEventListener('click', () => window.location.href = 'game.html');
+    document.getElementById('back-btn').addEventListener('click', () => window.location.href = 'game.html');
+    document.getElementById('replay-btn').addEventListener('click', () => window.location.href = 'dragNdrop.html');
     document.getElementById('achievement-btn').addEventListener('click', () => this.downloadAchievement());
     document.getElementById('share-btn').addEventListener('click', () => this.shareResults());
     document.getElementById('home-btn').addEventListener('click', () => window.location.href = 'index.html');
