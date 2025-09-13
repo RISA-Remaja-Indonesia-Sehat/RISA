@@ -175,10 +175,12 @@
             </div>
 
             <div class="p-6">
-                <button class="button-10 text-sm font-semibold px-3 py-2 flex items-center gap-4" role="button">
-                    <span>Bagikan</span>
-                    <img width="25" height="25" src="https://img.icons8.com/ios-glyphs/30/share--v1.png" alt="share--v1"/>
-                </button>
+                <button id="share-btn" class="button-10 text-sm font-semibold px-3 py-2 flex items-center gap-4" role="button">
+                    <span class="flex items-center gap-2">Bagikan 
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"/>
+                    </svg></span>
+               </button>
             </div>
         </div>
 
@@ -188,7 +190,8 @@
                 <h4 class="mb-2 font-medium">Drag & Drop Challenge</h4>
                 <img src="./media/game-item.png" alt="Game Item" class="mb-4">
 
-                <a href="./game.html">
+                <a href="dragNdrop.html">
+
                     <button class="button-10 text-xs px-4 py-2" role="button">
                         <span>Coba Sekarang</span>
                     </button>
@@ -235,5 +238,30 @@
 
     <script type="module" src="../src/js/index.js"></script>
     <script type="module" src="../src/js/hiv-quiz.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('share-btn').addEventListener('click', shareResults);
+            
+            function shareResults() {
+                const shareText = 'HIV? Gak Usah Panik, Yuk Kenalan Dulu!';
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'HIV? Gak Usah Panik, Yuk Kenalan Dulu!',
+                        text: shareText,
+                        url: window.location.origin + '/article-hiv.html'
+                    }).catch(console.error);
+                } else {
+                    navigator.clipboard.writeText(shareText)
+                        .then(() => {
+                            showShareFeedback();
+                        })
+                        .catch(() => {
+                            openShareModal();
+                        });
+                }
+            }
+        });    
+    </script>
 </body>
 </html>
