@@ -10,7 +10,7 @@ export function renderNavbar() {
       <ul class="hidden md:flex gap-6 text-gray-700 font-medium">
         <li><a href="index.html" class="hover:text-pink-500">Beranda</a></li>
         <li><a href="game.html" class="hover:text-pink-500">Mini Games</a></li>
-        <li><a href="cycle.html" class="hover:text-pink-500">My Cycle</a></li>
+        <li><a href="cycle.html" class="hover:text-pink-500">Siklusku</a></li>
         <li><a href="vaksin.html" class="hover:text-pink-500">Vaksin HPV</a></li>
       </ul>
 
@@ -51,7 +51,7 @@ export function renderNavbar() {
         </button>
         <a href="index.html" class="hover:text-pink-500">Beranda</a>
         <a href="game.html" class="hover:text-pink-500">Mini Games</a>
-        <a href="cycle.html" class="hover:text-pink-500">My Cycle</a>
+        <a href="cycle.html" class="hover:text-pink-500">Siklusku</a>
         <a href="vaksin.html" class="hover:text-pink-500">Vaksin HPV</a>
       </div>
     </nav>
