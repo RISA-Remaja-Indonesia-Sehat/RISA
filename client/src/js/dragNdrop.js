@@ -48,6 +48,11 @@ const finalPointsEl = document.getElementById('finalPoints');
 const trophyImg = document.getElementById('trophyImg');
 const statementText = document.getElementById('statementText');
 const statementCard = document.getElementById('statementCard');
+const backBtn = document.getElementById('backBtn');
+
+backBtn.addEventListener("click", () => {
+  window.location.href ='./game.html'
+})
 
 
 
