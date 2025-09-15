@@ -69,12 +69,11 @@
                 </div>
             </div>
 
-            <!-- Results Details -->
+            <!-- Results -->
             <div class="space-y-4 mb-12 opacity-1" id="results-list">
-                <!-- Results will be populated by JavaScript -->
             </div>
 
-            <!-- Action Buttons -->
+            <!-- CTA -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0" id="action-buttons">
                 <button  id="replay-btn" class="button-10 text-sm font-semibold px-3 py-2 flex items-center gap-4" role="button">
                     <span>Main Lagi</span>
@@ -95,48 +94,37 @@
             </div>
         </div>
 
-        <!-- Recommended Articles Section -->
+        <!-- Artikel -->
         <div class="mt-16 opacity-0" id="recommendations">
             <h3 class="text-2xl font-bold text-gray-800 text-center mb-8">Kamu bisa baca ...</h3>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-
-                <a href="article-hiv.html" class="group cursor-pointer block">
-                    <div class="bg-gradient-to-br from-pink-100 to-rose-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                        <div class="h-48 bg-[url('./media/article-image-1.png')] bg-cover bg-center"></div>
-                        <div class="p-4">
-                            <h4 class="font-semibold text-gray-800 group-hover:text-pink-600 transition-colors">HIV? Gak Usah Panik, Yuk Kenalan Dulu!</h4>
-                        </div>
-                    </div>
-                </a>
-            
-        <a href="article-seks.html" class="group cursor-pointer block">
-            <div class="group cursor-pointer">
-                <div class="bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                    <div class="h-48 bg-[url('./media/article-image-2.png')] bg-cover bg-center"></div>
-                    <div class="p-4">
-                        <h4 class="font-semibold text-gray-800 group-hover:text-blue-600 transition-colors">Seks Itu Apa Sih? Biar Gak Salah Paham dan Bisa Jaga Diri!</h4>
-                    </div>
-                </div>
-            </div>
-        </a>
-        
-        <a href="article-menstruasi.html" class="group cursor-pointer block">
-
-            <div class="group cursor-pointer">
-                <div class="bg-gradient-to-br from-red-100 to-pink-100 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-                    <div class="h-48 bg-[url('./media/article-image-3.png')] bg-cover bg-center"></div>
-                    <div class="p-4">
-                        <h4 class="font-semibold text-gray-800 group-hover:text-red-600 transition-colors">Menstruasi Pertama: Kenapa Bisa Terjadi dan Gak Usah Takut!</h4>
-                    </div>
-                </div>
-            </div>
-        </a>     
-            </div>
+  
+   <section class="container my-16 mx-auto" id="article">
+      <div class="grid grid-cols-1 md:grid-cols-3 md:gap-2 lg:gap-6 p-4">
+        <div class="mb-4 hover:text-pink-600 hover:-translate-y-2 transition-all duration-300 group cursor-pointer block">
+          <a href="article-hiv.html">
+            <div class="bg-[url('./media/article-image-1.png')] bg-cover bg-top w-full h-48 mb-2"></div>
+            <span class="font-medium">HIV? Gak Usah Panik, Yuk Kenalan Dulu!</span> 
+            <p class="text-sm leading-relaxed text-gray-600">Kenalan sama HIV biar gak salah paham dan tetap bisa jaga diri.</p>
+          </a>
         </div>
-    </section>
-
-    <!-- Canvas for confetti -->
+        <div class="mb-4 hover:text-pink-600 hover:-translate-y-2 transition-all duration-300 group cursor-pointer block">
+          <a href="./article-seks.html">
+            <div class="bg-[url('./media/article-image-2.png')] bg-cover bg-top w-full h-48 mb-2"></div>
+            <span class="font-medium">Seks Itu Apa Sih? Biar Gak Salah Paham dan Bisa Jaga Diri!</span>
+            <p class="text-gray-600 leading-relaxed text-sm">Belajar soal seks biar gak salah langkah dan bisa jaga diri.</p>
+          </a>
+        </div>
+        <div class="mb-4 hover:text-pink-600 hover:-translate-y-2 transition-all duration-300 group cursor-pointer block">
+          <a href="article-menstruasi.html">
+            <div class="bg-[url('./media/article-image-3.png')] bg-cover bg-top w-full h-48 mb-2"></div>
+            <span class="font-medium">Menstruasi Pertama: Kenapa Bisa Terjadi dan Gak Usah Takut!</span>
+            <p class="text-gray-600 leading-relaxed text-sm">Menstruasi pertama itu alami, yuk siapin diri biar gak panik.</p>
+          </a>
+        </div>
+    </div>
+   </section>
+    <!-- confetti -->
     <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
 
     <footer id="footer"></footer>

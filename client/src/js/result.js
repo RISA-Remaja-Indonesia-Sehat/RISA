@@ -1,6 +1,3 @@
-// result.js - Game Result Page with GSAP Animations
-
-
  document.addEventListener("DOMContentLoaded", () => {
     const audio = document.getElementById("complete-audio");
     if (audio) {
@@ -9,7 +6,6 @@
       });
     }
   });
-
 
 
 class ResultPage {
@@ -242,18 +238,18 @@ class ResultPage {
     achievementElement.style.textAlign = 'center';
     achievementElement.style.zIndex = '1000';
     achievementElement.innerHTML = `
-      <h2 style="font-size: 24px; margin-bottom: 10px;"> 🎉Certificate of Achievement 🎉</h2>
-      <p style="font-size: 18px; margin-bottom: 20px;">Aku mendapatkan skor ${this.results.score} di game Mitos vs Fakta!</p>
+      <h2 style="font-size: 24px; margin-bottom: 10px;"> 🎉Sertifikat Pencapaian 🎉</h2>
+      <p style="font-size: 18px; margin-bottom: 20px;">Selamat! Kamu telah mendapatkan skor ${this.results.score*20} di game Mitos vs Fakta!</p>
       <p style="font-size: 14px; color: #555;">Teruslah belajar, teruslah berkembang 🌸</p>
       <span>
-        <img src="/client/public/media/LogoRisa.png" alt="RISA Logo" style="width: 30px; margin-top: 10px;">
+        <img src="/client/media/LogoRisa.png" alt="RISA Logo" style="width: 30px; margin-top: 10px;">
       </span>
     `;
-    document.body.appendChild(achievementElement);
+    document.body.appendChild(achievementElement);  
 
     html2canvas(achievementElement).then(canvas => {  
       const link = document.createElement('a');
-      link.download = 'achievement-mitosvsfakta.png';
+      link.download = 'pencapaian-mitosvsfakta.png';
       link.href = canvas.toDataURL();
       link.click();
       document.body.removeChild(achievementElement);
@@ -267,7 +263,7 @@ class ResultPage {
       navigator.share({
         title: 'Mitos vs Fakta - RISA',
         text: shareText,
-        url: window.location.origin + '/index.html'
+        url: window.location.origin
       }).catch(console.error);
     } else {
       navigator.clipboard.writeText(shareText).then(() => {
@@ -297,8 +293,8 @@ class ResultPage {
   }
 
   openShareModal() {
-    const shareUrl = encodeURIComponent(window.location.origin + '/index.html');
-    const shareText = encodeURIComponent(`Aku baru saja menyelesaikan game Mitos vs Fakta di RISA dan mendapat skor ${this.results.score}!`);
+    const shareUrl = encodeURIComponent(window.location.origin);
+    const shareText = encodeURIComponent(`Aku baru saja menyelesaikan game Mitos vs Fakta di RISA dan mendapat skor ${this.results.score*20}!`);
     
     const socialLinks = {
       whatsapp: `https://wa.me/?text=${shareText} ${shareUrl}`,
